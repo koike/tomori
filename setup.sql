@@ -49,13 +49,13 @@ INSERT INTO SIGNATURE VALUES
     date('Y-m-d H:i:s')
 );
 
-INSERT INTO SIGNATURE VALUES
-(
-    1,
-    '/http:\/\/([a-zA-Z0-9]+).([A-Z0-9]+).([A-Z0-9]+)/',
-    'Exploit Kit',
-    date('Y-m-d H:i:s')
-);
+-- INSERT INTO SIGNATURE VALUES
+-- (
+--     1,
+--     '/http:\/\/([a-zA-Z0-9]+).([A-Z0-9]+).([A-Z0-9]+)/',
+--     'Exploit Kit',
+--     date('Y-m-d H:i:s')
+-- );
 
 INSERT INTO SIGNATURE VALUES
 (
@@ -76,6 +76,6 @@ CREATE TABLE RESULT
 CREATE TABLE HTML
 (
     url TEXT,
-    html LONGTEXT,
+    html TEXT,
     created_at DATETIME
 );

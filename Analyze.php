@@ -10,22 +10,19 @@ class Analyze
             $is_mallicious,
             $result;
     
-    public function __construct(string $url, string $db_filename = 'tomori.db')
+    public function __construct(string $url)
     {
         $this->url = $url;
         $this->html = '';
         $this->is_mallicious = false;
         $result = null;
-        if(!defined('DB_FILENAME'))
-        {
-            define('DB_FILENAME', $db_filename);
-        }
     }
 
     public function analyze(array $response) : bool
     {
         $status = $response['status'];
         $html = $response['body'];
+        $this->html = $html;
         if($status >= 200 && $status <= 400)
         {
             $sig = Signature::get();
@@ -56,12 +53,18 @@ class Analyze
 
     public function register_db()
     {
+        if(!file_exists('html'))
+        {
+            mkdir('html');
+        }
+        $file = 'html/' . date('Y-m-d_H-i-s') . '.html';
+        file_put_contents($file, $this->html);
         DB::table('HTML')
         ->insert
         (
             [
                 'url'           =>  $this->url,
-                'html'          =>  $this->html,
+                'html'          =>  $file,
                 'created_at'    =>  date('Y-m-d H:i:s')
             ]
         );
