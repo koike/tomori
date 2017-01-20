@@ -2,7 +2,7 @@
 
 class Notificate
 {
-    public static function slack(Tomori $tomori)
+    public static function slack($tomori = null)
     {
         // ToDo: implement
     }

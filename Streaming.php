@@ -5,6 +5,7 @@ require_once 'vendor/fennb/phirehose/lib/OauthPhirehose.php';
 
 require_once 'Request.php';
 require_once 'Analyze.php';
+require_once 'Notificate.php';
 
 class SampleConsumer extends OauthPhirehose
 {
@@ -16,6 +17,14 @@ class SampleConsumer extends OauthPhirehose
             $url = $data['entities']['urls'][0]['expanded_url'] ?? null;
             if($url != null)
             {
+                $already_access = DB::table('RESULT')
+                ->where('url', $url)
+                ->get();
+                if(!empty($already_access))
+                {
+                    return null;
+                }
+
                 $response = Request::get($url);
                 $tomori = new Analyze($url);
                 $is_mallicious = $tomori->analyze($response);

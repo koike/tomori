@@ -16,7 +16,10 @@ class Analyze
         $this->html = '';
         $this->is_mallicious = false;
         $result = null;
-        define('DB_FILENAME', $db_filename);
+        if(!defined('DB_FILENAME'))
+        {
+            define('DB_FILENAME', $db_filename);
+        }
     }
 
     public function analyze(array $response) : bool
@@ -30,7 +33,7 @@ class Analyze
             {
                 if($sig[$i]['is_reg'])
                 {
-                    $sig[$i]['is_mallicious'] = preg_match($sig[0]['pattern'], $html);
+                    $sig[$i]['is_mallicious'] = preg_match($sig[$i]['pattern'], $html);
                 }
                 else
                 {
@@ -51,7 +54,7 @@ class Analyze
         }
     }
 
-    public function register_db() : void
+    public function register_db()
     {
         DB::table('HTML')
         ->insert
@@ -65,17 +68,19 @@ class Analyze
 
         for($i=0; $i<count($this->result); $i++)
         {
-            DB::table('RESULT')
-            ->insert
-            (
-                [
-                    'url'           =>  $this->url,
-                    'pattern'       =>  $this->result[$i]['pattern'],
-                    'description'   =>  $this->result[$i]['description'],
-                    'is_mallicious' =>  $this->is_mallicious,
-                    'created_at'    =>  date('Y-m-d H:i:s')
-                ]
-            );
+            if($this->result[$i]['is_mallicious'])
+            {
+                DB::table('RESULT')
+                ->insert
+                (
+                    [
+                        'url'           =>  $this->url,
+                        'pattern'       =>  $this->result[$i]['pattern'],
+                        'description'   =>  $this->result[$i]['description'],
+                        'created_at'    =>  date('Y-m-d H:i:s')
+                    ]
+                );
+            }
         }
     }
 }

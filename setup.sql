@@ -70,7 +70,6 @@ CREATE TABLE RESULT
     url TEXT,
     pattern TEXT,
     description TEXT,
-    is_mallicious BOOLEAN,
     created_at DATETIME
 );
 
