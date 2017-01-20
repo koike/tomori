@@ -26,7 +26,14 @@ class Analyze
             $sig = Signature::get();
             for($i=0; $i<count($sig); $i++)
             {
-                $sig[$i]['is_mallicious'] = preg_match($sig[0]['pattern'], $html);
+                if($sig[$i]['is_reg'])
+                {
+                    $sig[$i]['is_mallicious'] = preg_match($sig[0]['pattern'], $html);
+                }
+                else
+                {
+                    $sig[$i]['is_mallicious'] = eval($sig[$i]['pattern']);
+                }
                 if($sig[$i]['is_mallicious'] && !$this->is_mallicious)
                 {
                     $this->is_mallicious = true;
