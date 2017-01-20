@@ -10,7 +10,7 @@ class FilterTrackConsumer extends OauthPhirehose
         $data = json_decode($status, true);
         if (is_array($data))
         {
-            $url = $data['entities']['urls']['expanded_url'] ?? null;
+            $url = $data['entities']['urls'][0]['expanded_url'] ?? null;
             if($url != null)
             {
                 $response = Request::get($url);
@@ -40,6 +40,7 @@ class Streaming
     public function start()
     {
         $sc = new FilterTrackConsumer(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET, Phirehose::METHOD_FILTER);
+        $sc->setTrack(['https://t.co']);
         $sc->consume();
     }
 }
