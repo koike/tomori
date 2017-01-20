@@ -4,6 +4,6 @@ class Notificate
 {
     public static function slack(Tomori $tomori)
     {
-        //
+        // ToDo: implement
     }
 }
