@@ -3,11 +3,15 @@
 
 ## Usage
 ```sh
-$ composer install
+# clone repository
+$ git clone https://github.com/koike/tomori.git
 
-$ sqlite3 tomori.db
-sqlite> .read init.sql
+# setup files & create db
+$ php install.php
 
-# ToDo: Write Install Script
-# $ php install.php
+# write twitter api key
+$ vi .env
+
+# start
+$ php tomori.php
 ```
