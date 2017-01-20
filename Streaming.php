@@ -17,7 +17,7 @@ class FilterTrackConsumer extends OauthPhirehose
                 $tomori = new Analyze($url);
                 $is_mallicious = $tomori->analyze($response);
                 
-                if(!$is_mallicious)
+                if($is_mallicious)
                 {
                     $tomori->register_db();
                     Notificate::slack($tomori);
