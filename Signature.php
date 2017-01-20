@@ -6,6 +6,6 @@ class Signature
 {
     public static function get()
     {
-        return DB::table('SIGNATURE')->get();
+        return DB::table('SIGNATURE')->get()->toArray();
     }
 }

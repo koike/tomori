@@ -1,9 +1,12 @@
 <?php
 
-require_once('vendor/fennb/phirehose/lib/Phirehose.php');
-require_once('vendor/fennb/phirehose/lib/OauthPhirehose.php');
+require_once 'vendor/fennb/phirehose/lib/Phirehose.php';
+require_once 'vendor/fennb/phirehose/lib/OauthPhirehose.php';
 
-class FilterTrackConsumer extends OauthPhirehose
+require_once 'Request.php';
+require_once 'Analyze.php';
+
+class SampleConsumer extends OauthPhirehose
 {
     public function enqueueStatus($status)
     {
@@ -21,6 +24,12 @@ class FilterTrackConsumer extends OauthPhirehose
                 {
                     $tomori->register_db();
                     Notificate::slack($tomori);
+
+                    echo '[!] ' . $url . PHP_EOL;
+                }
+                else
+                {
+                    echo '[-] ' . $url . PHP_EOL;
                 }
             }
         }
@@ -31,8 +40,21 @@ class Streaming
 {
     public static function start()
     {
-        $sc = new FilterTrackConsumer(getenv('TWITTER_ACCESS_TOKEN'), getenv('TWITTER_ACCESS_TOKEN_SECRET'), Phirehose::METHOD_FILTER);
-        $sc->setTrack(['https://t.co']);
+        define('TWITTER_CONSUMER_KEY', getenv('TWITTER_CONSUMER_KEY'));
+        define('TWITTER_CONSUMER_SECRET', getenv('TWITTER_CONSUMER_SECRET'));
+        define('OAUTH_TOKEN', getenv('OAUTH_TOKEN'));
+        define('OAUTH_SECRET', getenv('OAUTH_SECRET'));
+        
+        $sc = new
+        // FilterTrackConsumer
+        SampleConsumer
+        (
+            OAUTH_TOKEN,
+            OAUTH_SECRET,
+            // Phirehose::METHOD_FILTER
+            Phirehose::METHOD_SAMPLE
+        );
+        // $sc->setTrack(['https://t.co']);
         $sc->consume();
     }
 }

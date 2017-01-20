@@ -1,6 +1,7 @@
 <?php
 
-require_once('Database.php');
+require_once 'Database.php';
+require_once 'Signature.php';
 
 class Analyze
 {
@@ -21,6 +22,7 @@ class Analyze
     public function analyze(array $response) : bool
     {
         $status = $response['status'];
+        $html = $response['body'];
         if($status >= 200 && $status <= 400)
         {
             $sig = Signature::get();

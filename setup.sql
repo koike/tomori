@@ -6,7 +6,7 @@ CREATE TABLE SIGNATURE
     is_reg BOOLEAN,
     pattern TEXT,
     description TEXT,
-    created_at TEXT
+    created_at DATETIME
 );
 
 INSERT INTO SIGNATURE VALUES
@@ -71,12 +71,12 @@ CREATE TABLE RESULT
     pattern TEXT,
     description TEXT,
     is_mallicious BOOLEAN,
-    created_at TEXT
+    created_at DATETIME
 );
 
 CREATE TABLE HTML
 (
     url TEXT,
     html LONGTEXT,
-    created_at TEXT
+    created_at DATETIME
 );
