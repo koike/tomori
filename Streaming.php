@@ -29,17 +29,9 @@ class FilterTrackConsumer extends OauthPhirehose
 
 class Streaming
 {
-    public function __construct()
+    public static function start()
     {
-        define('TWITTER_CONSUMER_KEY', getenv('TWITTER_CONSUMER_KEY'));
-        define('TWITTER_CONSUMER_SECRET', getenv('TWITTER_CONSUMER_SECRET'));
-        define('TWITTER_ACCESS_TOKEN', getenv('TWITTER_ACCESS_TOKEN'));
-        define('TWITTER_ACCESS_TOKEN_SECRET', getenv('TWITTER_ACCESS_TOKEN_SECRET'));
-    }
-    
-    public function start()
-    {
-        $sc = new FilterTrackConsumer(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET, Phirehose::METHOD_FILTER);
+        $sc = new FilterTrackConsumer(getenv('TWITTER_ACCESS_TOKEN'), getenv('TWITTER_ACCESS_TOKEN_SECRET'), Phirehose::METHOD_FILTER);
         $sc->setTrack(['https://t.co']);
         $sc->consume();
     }
