@@ -6,6 +6,7 @@ require_once 'vendor/fennb/phirehose/lib/OauthPhirehose.php';
 require_once 'Request.php';
 require_once 'Analyze.php';
 require_once 'Notificate.php';
+require_once 'Database.php';
 
 class SampleConsumer extends OauthPhirehose
 {
@@ -17,20 +18,97 @@ class SampleConsumer extends OauthPhirehose
             $url = $data['entities']['urls'][0]['expanded_url'] ?? null;
             if($url != null)
             {
+<<<<<<< HEAD
+                if(strpos(substr($url, 0, strlen('https://twitter.com/')), '://twitter.com/') !== false)
+                {
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://itunes.apple.com/')), '://itunes.apple.com/') !== false)
+=======
                 $response = Request::get($url);
                 $tomori = new Analyze($url);
                 $is_mallicious = $tomori->analyze($response);
                 
                 if($is_mallicious)
+>>>>>>> 385b8f0478622db43f9c3879313ffb4454633c76
                 {
-                    $tomori->register_db();
-                    Notificate::slack($tomori);
-
-                    echo '[!] ' . $url . PHP_EOL;
+                    return;
                 }
-                else
+                if(strpos(substr($url, 0, strlen('https://www.youtube.com/')), '://www.youtube.com/') !== false)
                 {
-                    echo '[-] ' . $url . PHP_EOL;
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://youtube.com/')), '://youtube.com/') !== false)
+                {
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://youtu.be/')), '://youtu.be/') !== false)
+                {
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://www.instagram.com/')), '://www.instagram.com/') !== false)
+                {
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://www.news24.com/')), '://www.news24.com/') !== false)
+                {
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://facebook.com/')), '://facebook.com/') !== false)
+                {
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://fb.me/')), '://fb.me/') !== false)
+                {
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://m.youtube.com/')), '://m.youtube.com/') !== false)
+                {
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://amazon.co./')), '://amazon.co./') !== false)
+                {
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://www.amazon.co./')), '://www.amazon.co./') !== false)
+                {
+                    return;
+                }
+                if(strpos(substr($url, 0, strlen('https://ameblo.jp/')), '://ameblo.jp/') !== false)
+                {
+                    return;
+                }
+
+                $url_accessed = json_decode
+                (
+                    json_encode
+                    (
+                        DB::table('URL')->where('url', $url)->get()
+                    ),
+                    true
+                );
+
+                if(empty($url_accessed))
+                {
+                    DB::table('URL')
+                    ->insert
+                    (
+                        [
+                            'url'           =>  $url,
+                            'created_at'    =>  date('Y-m-d H:i:s')
+                        ]
+                    );
+
+                    $response = Request::get($url);
+                    $tomori = new Analyze($url);
+                    $rate = $tomori->analyze($response);
+                    
+                    if($rate > 1)
+                    {
+                        $tomori->register_db();
+                        Notificate::slack($tomori);
+                    }
+                    echo '[' . $rate . '] ' . $url . PHP_EOL;
                 }
             }
         }

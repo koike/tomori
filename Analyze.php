@@ -8,6 +8,7 @@ class Analyze
     private $url,
             $html,
             $is_mallicious,
+            $rate,
             $result;
     
     public function __construct(string $url)
@@ -18,37 +19,71 @@ class Analyze
         $result = null;
     }
 
-    public function analyze(array $response) : bool
+    public function analyze(array $response)
     {
         $status = $response['status'];
         $html = $response['body'];
         $this->html = $html;
+<<<<<<< HEAD
+        $this->rate = 0;
+=======
+>>>>>>> 385b8f0478622db43f9c3879313ffb4454633c76
         if($status >= 200 && $status <= 400)
         {
-            $sig = Signature::get();
-            for($i=0; $i<count($sig); $i++)
+            // spanのtopが大きなマイナス値
+            if(preg_match('/<span style="position:absolute; top:-([0-9]{3,4})px/', $html))
             {
-                if($sig[$i]['is_reg'])
-                {
-                    $sig[$i]['is_mallicious'] = preg_match($sig[$i]['pattern'], $html);
-                }
-                else
-                {
-                    $sig[$i]['is_mallicious'] = eval($sig[$i]['pattern']);
-                }
-                if($sig[$i]['is_mallicious'] && !$this->is_mallicious)
-                {
-                    $this->is_mallicious = true;
-                }
+                $this->rate += 1;
             }
-            $this->result = $sig;
+            
+            // iframeのsrcが小文字.大文字.大文字からなるドメイン
+            if(preg_match('/iframe src="http:\/\/([a-z0-9]+)\.([A-Z0-9\-_]+)\.([A-Z0-9\-_]+)/', $html))
+            {
+                $this->rate += 1;
+            }
+            
+            // bodyがすぐに閉じられる
+            if(preg_match('/<body> <\/body>/', $html))
+            {
+                $this->rate += 1;
+            }
+            
+            // "iframe"という値を持つ変数
+            if(preg_match('/var ([a-zA-Z]{5,10}) = "iframe"/', $html))
+            {
+                $this->rate += 1;
+            }
+            
+            // style.borderが0px
+            if(preg_match('/style\.border = "0px"/', $html))
+            {
+                $this->rate += 0.5;
+            }
+            
+            // frameBorderが0
+            if(preg_match('/frameBorder = "0"/', $html))
+            {
+                $this->rate += 0.5;
+            }
+            
+            // setAttributeでframeBorderを0
+            // if(preg_grep('/setAttribute\("frameBorder", "0"\)/', $html))
+            // {
+            //     $this->rate += 0.5;
+            // }
+            
+            // 小文字.大文字.大文字からなるドメイン
+            if(preg_match('/http:\/\/([a-z0-9]+)\.([A-Z0-9\-_]+)\.([A-Z0-9\-_]+)/', $html))
+            {
+                $this->rate += 0.5;
+            }
+        }
 
-            return $this->is_mallicious;
-        }
-        else
+        if($this->rate > 1)
         {
-            return false;
+            $this->is_mallicious = true;
         }
+        return $this->rate;
     }
 
     public function register_db()
@@ -69,21 +104,15 @@ class Analyze
             ]
         );
 
-        for($i=0; $i<count($this->result); $i++)
-        {
-            if($this->result[$i]['is_mallicious'])
-            {
-                DB::table('RESULT')
-                ->insert
-                (
-                    [
-                        'url'           =>  $this->url,
-                        'pattern'       =>  $this->result[$i]['pattern'],
-                        'description'   =>  $this->result[$i]['description'],
-                        'created_at'    =>  date('Y-m-d H:i:s')
-                    ]
-                );
-            }
-        }
+        DB::table('RESULT')
+        ->insert
+        (
+            [
+                'url'           =>  $this->url,
+                'rate'          =>  $this->rate,
+                'description'   =>  'Exploit Kit',
+                'created_at'    =>  date('Y-m-d H:i:s')
+            ]
+        );
     }
 }

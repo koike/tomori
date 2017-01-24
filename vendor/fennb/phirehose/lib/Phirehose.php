@@ -147,7 +147,7 @@ abstract class Phirehose
   protected $idleReconnectTimeout = 90;
   protected $avgPeriod = 60;
   protected $status_length_base = 10;
-  protected $userAgent       = 'Phirehose/1.0RC +https://github.com/fennb/phirehose';
+  protected $userAgent       = 'TomoriNao';
   protected $filterCheckMin = 5;
   protected $filterUpdMin   = 120;
   protected $tcpBackoff      = 1;

@@ -28,7 +28,8 @@ class Request
                     [
                         'User-Agent'    =>  $ua,
                         'Referer'       =>  $ref
-                    ]
+                    ],
+                    'timeout'   =>  5
                 ]
             );
 
