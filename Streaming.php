@@ -18,19 +18,16 @@ class SampleConsumer extends OauthPhirehose
             $url = $data['entities']['urls'][0]['expanded_url'] ?? null;
             if($url != null)
             {
-<<<<<<< HEAD
                 if(strpos(substr($url, 0, strlen('https://twitter.com/')), '://twitter.com/') !== false)
                 {
                     return;
                 }
                 if(strpos(substr($url, 0, strlen('https://itunes.apple.com/')), '://itunes.apple.com/') !== false)
-=======
                 $response = Request::get($url);
                 $tomori = new Analyze($url);
                 $is_mallicious = $tomori->analyze($response);
                 
                 if($is_mallicious)
->>>>>>> 385b8f0478622db43f9c3879313ffb4454633c76
                 {
                     return;
                 }

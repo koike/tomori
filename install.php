@@ -8,6 +8,3 @@ if(!file_exists('tomori.db'))
     $sql = 'sqlite3 tomori.db < setup.sql';
     exec($sql, $arr, $ret);
 }
-
-// ToDo: store data -> db
-//

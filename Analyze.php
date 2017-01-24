@@ -24,10 +24,8 @@ class Analyze
         $status = $response['status'];
         $html = $response['body'];
         $this->html = $html;
-<<<<<<< HEAD
         $this->rate = 0;
-=======
->>>>>>> 385b8f0478622db43f9c3879313ffb4454633c76
+
         if($status >= 200 && $status <= 400)
         {
             // spanのtopが大きなマイナス値
