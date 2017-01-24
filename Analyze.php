@@ -19,7 +19,7 @@ class Analyze
         $result = null;
     }
 
-    public function analyze(array $response)
+    public function analyze($response)
     {
         $status = $response['status'];
         $html = $response['body'];

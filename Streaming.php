@@ -15,7 +15,7 @@ class SampleConsumer extends OauthPhirehose
         $data = json_decode($status, true);
         if (is_array($data))
         {
-            $url = $data['entities']['urls'][0]['expanded_url'] ?? null;
+            $url = isset($data['entities']['urls'][0]['expanded_url']) ? $data['entities']['urls'][0]['expanded_url'] : null;
             if($url != null)
             {
                 if(strpos(substr($url, 0, strlen('https://twitter.com/')), '://twitter.com/') !== false)
