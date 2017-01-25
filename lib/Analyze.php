@@ -168,6 +168,10 @@ class Analyze
         {
             return false;
         }
+        if(strpos(substr($url, 0, strlen('https://http://figsoku.net/')), '://figsoku.net/') !== false)
+        {
+            return false;
+        }
 
         return true;
     }
@@ -175,5 +179,15 @@ class Analyze
     public function get_url()
     {
         return $this->url;
+    }
+
+    public function get_rate()
+    {
+        return $this->rate;
+    }
+
+    public function get_is_mallicious()
+    {
+        return $this->is_mallicious;
     }
 }

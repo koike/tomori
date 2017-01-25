@@ -30,12 +30,14 @@ class SampleConsumer extends OauthPhirehose
 
                 if(empty($url_accessed))
                 {
+                    $date = date('Y-m-d H:i:s');
+
                     DB::table('URL')
                     ->insert
                     (
                         [
                             'url'           =>  $url,
-                            'created_at'    =>  date('Y-m-d H:i:s')
+                            'created_at'    =>  $date
                         ]
                     );
 
@@ -43,10 +45,11 @@ class SampleConsumer extends OauthPhirehose
                     $tomori = new Analyze($url);
                     $rate = $tomori->analyze($response);
                     
-                    if($rate > 1)
+                    if($tomori->get_is_mallicious())
                     {
                         $tomori->register_db();
                         Notificate::slack($tomori);
+                        User::register($data, $date);
                     }
                     echo '[' . $rate . '] ' . $url . PHP_EOL;
                 }
@@ -65,15 +68,12 @@ class Streaming
         define('OAUTH_SECRET', getenv('OAUTH_SECRET'));
         
         $sc = new
-        // FilterTrackConsumer
         SampleConsumer
         (
             OAUTH_TOKEN,
             OAUTH_SECRET,
-            // Phirehose::METHOD_FILTER
             Phirehose::METHOD_SAMPLE
         );
-        // $sc->setTrack(['https://t.co']);
         $sc->consume();
     }
 }

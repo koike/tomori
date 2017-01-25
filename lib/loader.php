@@ -10,3 +10,4 @@ require_once 'lib/Notificate.php';
 require_once 'lib/Request.php';
 require_once 'lib/Signature.php';
 require_once 'lib/Streaming.php';
+require_once 'lib/User.php';
