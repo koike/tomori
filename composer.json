@@ -3,7 +3,6 @@
         "illuminate/database": "^5.3",
         "illuminate/events": "^5.3",
         "guzzlehttp/guzzle": "^6.2",
-        "fennb/phirehose": "^1.0",
         "vlucas/phpdotenv": "^2.4"
     }
 }

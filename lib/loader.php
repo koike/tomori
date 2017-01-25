@@ -1,8 +1,8 @@
 <?php
 
 require_once 'vendor/autoload.php';
-require_once 'vendor/fennb/phirehose/lib/Phirehose.php';
-require_once 'vendor/fennb/phirehose/lib/OauthPhirehose.php';
+require_once 'phirehose/Phirehose.php';
+require_once 'phirehose/OauthPhirehose.php';
 
 require_once 'lib/Analyze.php';
 require_once 'lib/Database.php';
