@@ -1,10 +1,10 @@
 # tomori
-```tomori``` is tools for analyze Drive-by Download
+```tomori``` is tools for analyze Drive-by Download on Twitter
 
 ## Require
 - PHP ~7.0
 - SQLite 3
-- Composer (Latest)
+- Composer
 
 ## Usage
 ```sh
@@ -14,7 +14,7 @@ $ git clone https://github.com/koike/tomori.git
 # setup files & create db
 $ php install.php
 
-# write twitter api key
+# write api key
 $ vi .env
 
 # start
