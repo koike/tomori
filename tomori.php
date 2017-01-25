@@ -1,6 +1,6 @@
 <?php
 
-require_once 'loader.php';
+require_once 'lib/loader.php';
 
 use Dotenv\Dotenv;
 
