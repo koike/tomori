@@ -172,7 +172,7 @@ class Analyze
         return true;
     }
 
-    public function get_url() : string
+    public function get_url()
     {
         return $this->url;
     }
