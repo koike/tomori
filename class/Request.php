@@ -1,12 +1,10 @@
 <?php
 
-require_once 'vendor/autoload.php';
-
 use GuzzleHttp\Client;
 
 class Request
 {
-    public static function get($url, $ua = null, $ref = null)
+    public static function get(string $url, $ua = null, $ref = null) : array
     {
         if(!is_string($url) || strlen($url) == 0)
         {

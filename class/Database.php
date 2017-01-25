@@ -1,7 +1,5 @@
 <?php
 
-require_once 'vendor/autoload.php';
-
 use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
 use Illuminate\Database\Capsule\Manager as BaseDB;

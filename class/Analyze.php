@@ -1,8 +1,5 @@
 <?php
 
-require_once 'Database.php';
-require_once 'Signature.php';
-
 class Analyze
 {
     private $url,
@@ -19,7 +16,7 @@ class Analyze
         $result = null;
     }
 
-    public function analyze($response)
+    public function analyze(array $response) : float
     {
         $status = $response['status'];
         $html = $response['body'];
@@ -77,7 +74,7 @@ class Analyze
             }
         }
 
-        if($this->rate > 1)
+        if($this->rate >= 2)
         {
             $this->is_mallicious = true;
         }
@@ -113,5 +110,65 @@ class Analyze
                 'created_at'    =>  date('Y-m-d H:i:s')
             ]
         );
+    }
+
+    public function exclude_url() : bool
+    {
+        $url = $this->url;
+        
+        if(strpos(substr($url, 0, strlen('https://twitter.com/')), '://twitter.com/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://itunes.apple.com/')), '://itunes.apple.com/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://www.youtube.com/')), '://www.youtube.com/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://youtube.com/')), '://youtube.com/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://youtu.be/')), '://youtu.be/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://www.instagram.com/')), '://www.instagram.com/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://www.news24.com/')), '://www.news24.com/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://facebook.com/')), '://facebook.com/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://fb.me/')), '://fb.me/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://m.youtube.com/')), '://m.youtube.com/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://amazon.co./')), '://amazon.co./') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://www.amazon.co./')), '://www.amazon.co./') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://ameblo.jp/')), '://ameblo.jp/') !== false)
+        {
+            return false;
+        }
+
+        return true;
     }
 }
