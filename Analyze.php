@@ -26,7 +26,7 @@ class Analyze
         $this->html = $html;
         $this->rate = 0;
 
-        if($status >= 200 && $status <= 400)
+        if($status >= 200 && $status < 400)
         {
             // spanのtopが大きなマイナス値
             if(preg_match('/<span style="position:absolute; top:-([0-9]{3,4})px/', $html))
@@ -92,6 +92,7 @@ class Analyze
         }
         $file = 'html/' . date('Y-m-d_H-i-s') . '.html';
         file_put_contents($file, $this->html);
+        
         DB::table('HTML')
         ->insert
         (

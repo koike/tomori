@@ -23,11 +23,6 @@ class SampleConsumer extends OauthPhirehose
                     return;
                 }
                 if(strpos(substr($url, 0, strlen('https://itunes.apple.com/')), '://itunes.apple.com/') !== false)
-                $response = Request::get($url);
-                $tomori = new Analyze($url);
-                $is_mallicious = $tomori->analyze($response);
-                
-                if($is_mallicious)
                 {
                     return;
                 }
