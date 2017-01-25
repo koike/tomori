@@ -2,11 +2,11 @@
 ```tomori``` is tools for analyze Drive-by Download on Twitter
 
 ## Require
-- PHP ~7.0
+- PHP 7
 - SQLite 3
 - Composer
 
-## Usage
+## Install
 ```sh
 # clone repository
 $ git clone https://github.com/koike/tomori.git
@@ -16,7 +16,10 @@ $ php install.php
 
 # write api key
 $ vi .env
+```
 
+## Usage
+```sh
 # start
 $ php tomori.php
 ```

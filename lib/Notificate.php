@@ -6,7 +6,7 @@ class Notificate
     {
         $token = getenv('SLACK_TOKEN');
         $channel = urlencode('#alert');
-        $text = urlencode('[Compromised] ' . date('Y-m-d H:i:s') . '\n' . '```' . $tomori->url . '```');
+        $text = urlencode('[Compromised] ' . date('Y-m-d H:i:s') . '\n' . '```' . $tomori->get_url() . '```');
         $url = 'https://slack.com/api/chat.postMessage?token=' .
                 $token .
                 '&channel=' .
