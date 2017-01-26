@@ -23,10 +23,6 @@ class DB
             static::$db->setAsGlobal();
         }
 
-        if($method == 'get')
-        {
-            return json_decode(json_encode(static::$db->$method(...$args)), true);
-        }
         return static::$db->$method(...$args);
     }
 }
