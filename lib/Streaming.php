@@ -47,9 +47,8 @@ class SampleConsumer extends OauthPhirehose
                     
                     if($tomori->get_is_mallicious())
                     {
-                        $tomori->register_db();
-                        Notificate::slack($tomori);
-                        User::register($data, $date);
+                        $gist_url = $tomori->register_db($data);
+                        Notificate::slack($tomori, $gist_url);
                     }
                     echo '[' . $rate . '] ' . $url . PHP_EOL;
                 }

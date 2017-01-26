@@ -1,5 +1,5 @@
 # tomori
-```tomori``` is tools for analyze Drive-by Download on Twitter
+```tomori``` is tools for analyze Drive-by Download
 
 ## Require
 - PHP 7

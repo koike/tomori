@@ -81,21 +81,28 @@ class Analyze
         return $this->rate;
     }
 
-    public function register_db()
+    public function register_db($tweet = null)
     {
-        if(!file_exists('html'))
-        {
-            mkdir('html');
-        }
-        $file = 'html/' . date('Y-m-d_H-i-s') . '.html';
-        file_put_contents($file, $this->html);
+        // データをgistにPOSTする
+        $files =
+        [
+            "data.html" =>
+            [
+                'content'   =>  $this->html
+            ],
+            'tweet.json' =>
+            [
+                'content'   =>  json_encode($tweet)
+            ]
+        ];
+        $gist_url = Gist::create('', false, $files);
         
-        DB::table('HTML')
+        DB::table('GIST')
         ->insert
         (
             [
                 'url'           =>  $this->url,
-                'html'          =>  $file,
+                'gist'          =>  $gist_url,
                 'created_at'    =>  date('Y-m-d H:i:s')
             ]
         );
@@ -110,6 +117,8 @@ class Analyze
                 'created_at'    =>  date('Y-m-d H:i:s')
             ]
         );
+
+        return $gist_url;
     }
 
     public function exclude_url() : bool
@@ -168,11 +177,48 @@ class Analyze
         {
             return false;
         }
-        if(strpos(substr($url, 0, strlen('https://http://figsoku.net/')), '://figsoku.net/') !== false)
+        if(strpos(substr($url, 0, strlen('https://figsoku.net/')), '://figsoku.net/') !== false)
         {
             return false;
         }
-
+        if(strpos(substr($url, 0, strlen('https://vine.co/')), '://vine.co/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://twcm.me/')), '://twcm.me/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://i.ask.fm/')), '://i.ask.fm/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://l.ask.fm/')), '://l.ask.fm/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://amzn.to/')), '://amzn.to/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://www.dmm.co.jp/')), '://www.dmm.co.jp/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://www.pixiv.net/')), '://www.pixiv.net/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://www.swarmapp.com/')), '://www.swarmapp.com/') !== false)
+        {
+            return false;
+        }
+        if(strpos(substr($url, 0, strlen('https://www.facebook.com/')), '://www.facebook.com/') !== false)
+        {
+            return false;
+        }
+        
+        
         return true;
     }
 
