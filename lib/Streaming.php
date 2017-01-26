@@ -19,14 +19,7 @@ class SampleConsumer extends OauthPhirehose
                 }
 
                 // 既に解析していないか
-                $url_accessed = json_decode
-                (
-                    json_encode
-                    (
-                        DB::table('URL')->where('url', $url)->get()
-                    ),
-                    true
-                );
+                $url_accessed = DB::table('URL')->where('url', $url)->get();
 
                 if(empty($url_accessed))
                 {

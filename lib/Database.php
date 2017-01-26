@@ -22,6 +22,11 @@ class DB
             static::$db->setEventDispatcher(new Dispatcher(new Container));
             static::$db->setAsGlobal();
         }
+
+        if($method == 'get')
+        {
+            return json_decode(json_encode(static::$db->$method(...$args)), true);
+        }
         return static::$db->$method(...$args);
     }
 }
