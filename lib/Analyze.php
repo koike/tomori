@@ -44,7 +44,7 @@ class Analyze
             }
             
             // "iframe"という値を持つ変数
-            if(preg_match('/var ([a-zA-Z]{5,10}) = "iframe"/', $html))
+            if(preg_match('/var ([a-zA-Z]{4,8}) = "iframe"/', $html))
             {
                 $this->rate += 1;
             }
