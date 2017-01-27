@@ -43,14 +43,18 @@ class SampleConsumer extends OauthPhirehose
 
                     $response = Request::get($url);
                     $tomori = new Analyze($url);
-                    $rate = $tomori->analyze($response);
+                    $tomori->analyze($response);
                     
                     if($tomori->get_is_mallicious())
                     {
-                        $gist_url = $tomori->register_db($data);
-                        Notificate::slack($tomori, $gist_url);
+                        $tomori->register_db($data);
+                        Notificate::slack($tomori);
+                        echo '[*] ' . $url . PHP_EOL;
                     }
-                    echo '[' . $rate . '] ' . $url . PHP_EOL;
+                    else
+                    {
+                        echo '[-] ' . $url . PHP_EOL;
+                    }
                 }
             }
         }

@@ -2,20 +2,19 @@
 
 class Notificate
 {
-    public static function slack(Analyze $tomori, string $gist_url)
+    public static function slack(Analyze $tomori)
     {
-        $url = $tomori->get_url();
-        if($url != null)
+        if($tomori->get_url() != null)
         {
             $token = getenv('SLACK_TOKEN');
             $channel = urlencode('#alert');
             $text = urlencode
                     (
-                        '[Compromised (rate => ' .$tomori->get_rate() . ')] ' . date('Y-m-d H:i:s') .
+                        '[Compromised (' . $tomori->get_description() . ')] ' . date('Y-m-d H:i:s') .
                         "\n```\n" .
                         $tomori->get_url() .
                         "\n```" .
-                        'Gist => ' . $gist_url
+                        'Gist => ' . $tomori->get_gist_url()
                     );
             $url = 'https://slack.com/api/chat.postMessage?token=' .
                     $token .
