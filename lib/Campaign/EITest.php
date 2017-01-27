@@ -4,6 +4,8 @@ class EITest
 {
     public static function analyze(string $html) : bool
     {
+        $rate = 0;
+        
         // <body> </body>
         if(preg_match('/<body> <\/body>/', $html))
         {

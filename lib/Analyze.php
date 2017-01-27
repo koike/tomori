@@ -27,7 +27,7 @@ class Analyze
 
         if($status >= 200 && $status < 400)
         {
-            $pd = PseudoDarkleech::analyse($html);
+            $pd = PseudoDarkleech::analyze($html);
             if($pd)
             {
                 $this->description = 'PseudoDarkleech';
@@ -42,18 +42,16 @@ class Analyze
             {
                 $this->description = 'Afraidgate';
             }
+
+            if($pd || $ei || $af)
+            {
+                $this->is_mallicious = true;
+                return true;
+            }
         }
 
-        if($pd || $ei || $af)
-        {
-            $this->is_mallicious = true;
-            return true;
-        }
-        else
-        {
-            $this->is_mallicious = false;
-            return false;
-        }
+        $this->is_mallicious = false;
+        return false;
     }
 
     public function register_db($tweet = null)
