@@ -68,7 +68,7 @@ class Analyze
                 'content'   =>  json_encode($tweet)
             ]
         ];
-        $this->gist_url = Gist::create('', false, $files);
+        $this->gist_url = Gist::create('[' . $this->descripntion . ']' . $this->url, false, $files);
         
         DB::table('GIST')
         ->insert
