@@ -74,7 +74,14 @@ class Analyze
             ]
         ];
         echo '[Malicious URL] ' . $this->url;
-        $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
+        try
+        {
+            $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
+        }
+        catch(\Exception $e)
+        {
+            var_dump($e);
+        }
         echo '[Gist URL] ' . $this->gist_url;
         
         DB::table('GIST')
