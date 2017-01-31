@@ -15,8 +15,8 @@ class Notificate
                             '[Compromised (' . $tomori->get_description() . ')] ' . date('Y-m-d H:i:s') .
                             "\n```\n" .
                             $tomori->get_url() .
-                            "\n```" .
-                            'Gist => ' . $tomori->get_gist_url()
+                            "\n```\n\n" .
+                            '[Gist]\n' . $tomori->get_gist_url()
                         );
                 $url = 'https://slack.com/api/chat.postMessage?token=' .
                         $token .
