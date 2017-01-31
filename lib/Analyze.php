@@ -37,13 +37,18 @@ class Analyze
             {
                 $this->description = 'EITest';
             }
+            $ei2 = EITest::analyze($html);
+            if($ei2)
+            {
+                $this->description = 'EITest';
+            }
             $af = Afraidgate::analyze($html);
             if($af)
             {
                 $this->description = 'Afraidgate';
             }
 
-            if($pd || $ei || $af)
+            if($pd || $ei || $ei2 || $af)
             {
                 $this->is_mallicious = true;
                 return true;
