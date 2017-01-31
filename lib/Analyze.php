@@ -66,14 +66,16 @@ class Analyze
         [
             "data.html" =>
             [
-                'content'   =>  $this->html
+                'content'   =>  $this->html . ''
             ],
             'tweet.json' =>
             [
-                'content'   =>  json_encode($tweet)
+                'content'   =>  json_encode($tweet) . ''
             ]
         ];
-        $this->gist_url = Gist::create('[' . $this->descripntion . ']' . $this->url, false, $files);
+        echo '[Malicious URL] ' . $this->url;
+        $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
+        echo '[Gist URL] ' . $this->gist_url;
         
         DB::table('GIST')
         ->insert
