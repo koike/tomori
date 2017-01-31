@@ -48,7 +48,7 @@ class EITest
             $rate += 0.5;
         }
 
-        if($rate > 2)
+        if($rate >= 2)
         {
             return true;
         }

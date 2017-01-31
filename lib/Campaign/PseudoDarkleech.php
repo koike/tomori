@@ -18,7 +18,7 @@ class PseudoDarkleech
             $rate += 1;
         }
 
-        if($rate > 1)
+        if($rate >= 1)
         {
             return true;
         }

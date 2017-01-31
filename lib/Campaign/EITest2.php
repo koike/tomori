@@ -24,7 +24,7 @@ class EITest2
             $rate += 1;
         }
 
-        if($rate > 2)
+        if($rate >= 2)
         {
             return true;
         }
