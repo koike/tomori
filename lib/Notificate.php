@@ -29,21 +29,45 @@ class Notificate
         }
     }
 
-    public static function error(\Exception $e)
+    public static function error($no, $str, $file, $line)
+    {
+        $text = urlencode
+        (
+            "[Error (" .
+            $no .
+            ")]\nfile:" .
+            $file .
+            " => line:" .
+            $line .
+            "\n```\n" .
+            $str .
+            "\n```"
+        );
+
+        $url = 'https://slack.com/api/chat.postMessage?token=' .
+                $token .
+                '&channel=' .
+                $channel .
+                '&text=' .
+                $text;
+        file_get_contents($url);
+    }
+
+    public static function exception(\Exception $e)
     {
         ob_start();
         var_dump($e);
-        $error_dump = ob_get_contents();
+        $exception_dump = ob_get_contents();
         ob_end_clean();
 
-        $error_dump = str_replace('```', '` ` `', $error_dump);
+        $exception_dump = str_replace('```', '` ` `', $exception_dump);
         $message = $e->getMessage();
         $text = urlencode
         (
-            "[Error]\n" .
+            "[Exception]\n" .
             $message .
             "\n```\n" .
-            $error_dump .
+            $exception_dump .
             "\n```"
         );
 

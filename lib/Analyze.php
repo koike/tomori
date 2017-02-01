@@ -73,18 +73,9 @@ class Analyze
                 'content'   =>  json_encode($tweet) . ''
             ]
         ];
-        echo '[Malicious URL] ' . $this->url;
-        try
-        {
-            $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
-        }
-        catch(\Exception $e)
-        {
-            var_dump($e);
-            Notificate::error($e);
-            exit(-1);
-        }
-        echo '[Gist URL] ' . $this->gist_url;
+        echo '[URL] ' . $this->url . PHP_EOL;
+        $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
+        echo '[Gist] ' . $this->gist_url . PHP_EOL;
         
         DB::table('GIST')
         ->insert
