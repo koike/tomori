@@ -34,7 +34,7 @@ class Notificate
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {
-            $channel = urlencode('#alert');
+            $channel = urlencode('#error');
             $text = urlencode
             (
                 "[Error (" .
@@ -63,7 +63,7 @@ class Notificate
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {
-            $channel = urlencode('#alert');
+            $channel = urlencode('#exception');
 
             ob_start();
             var_dump($e);
