@@ -16,14 +16,15 @@ class Notificate
                             "\n```\n" .
                             $tomori->get_url() .
                             "\n```\n\n" .
-                            '[Gist]\n' . $tomori->get_gist_url()
+                            "[Gist]\n" . $tomori->get_gist_url()
                         );
                 $url = 'https://slack.com/api/chat.postMessage?token=' .
                         $token .
                         '&channel=' .
                         $channel .
                         '&text=' .
-                        $text;
+                        $text .
+                        '&as_user=true';
                 file_get_contents($url);
             }
         }
@@ -53,7 +54,8 @@ class Notificate
                     '&channel=' .
                     $channel .
                     '&text=' .
-                    $text;
+                    $text .
+                    '&as_user=true';
             file_get_contents($url);
         }
     }
@@ -84,7 +86,8 @@ class Notificate
                     '&channel=' .
                     $channel .
                     '&text=' .
-                    $text;
+                    $text .
+                    '&as_user=true';
             file_get_contents($url);
         }
     }
