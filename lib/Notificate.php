@@ -90,4 +90,27 @@ class Notificate
             file_get_contents($url);
         }
     }
+
+    public static function shutdown()
+    {
+        $token = getenv('SLACK_TOKEN');
+        if($token != null && $token != '')
+        {
+            $channel = urlencode('#alert');
+            $text = urlencode
+            (
+                "[Alert]\nSystem abnormally terminated!\nRebooting System..."
+            );
+
+            $url = 'https://slack.com/api/chat.postMessage?token=' .
+                    $token .
+                    '&channel=' .
+                    $channel .
+                    '&text=' .
+                    $text;
+            file_get_contents($url);
+        }
+
+        exec('nohup php tomori.php > /dev/null 2>&1 &', $arr, $res);
+    }
 }
