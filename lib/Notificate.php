@@ -23,8 +23,7 @@ class Notificate
                         '&channel=' .
                         $channel .
                         '&text=' .
-                        $text .
-                        '&as_user=true';
+                        $text;
                 file_get_contents($url);
             }
         }
@@ -54,8 +53,7 @@ class Notificate
                     '&channel=' .
                     $channel .
                     '&text=' .
-                    $text .
-                    '&as_user=true';
+                    $text;
             file_get_contents($url);
         }
     }
@@ -66,7 +64,7 @@ class Notificate
         if($token != null && $token != '')
         {
             $channel = urlencode('#alert');
-            
+
             ob_start();
             var_dump($e);
             $exception_dump = ob_get_contents();
@@ -88,8 +86,7 @@ class Notificate
                     '&channel=' .
                     $channel .
                     '&text=' .
-                    $text .
-                    '&as_user=true';
+                    $text;
             file_get_contents($url);
         }
     }
