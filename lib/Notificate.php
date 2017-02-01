@@ -65,6 +65,8 @@ class Notificate
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {
+            $channel = urlencode('#alert');
+            
             ob_start();
             var_dump($e);
             $exception_dump = ob_get_contents();
