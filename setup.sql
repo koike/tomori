@@ -123,3 +123,7 @@ INSERT INTO WHITE_LIST VALUES
 (
     'www.swarmapp.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'www.marca.com'
+);
