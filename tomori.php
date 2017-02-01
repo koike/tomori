@@ -6,6 +6,7 @@ use Dotenv\Dotenv;
 
 function error_handler($no, $str, $file, $line)
 {
+    Notificate::error($no, $str, $file, $line);
     exit(-1);
 }
 
