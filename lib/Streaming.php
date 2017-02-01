@@ -7,9 +7,19 @@ class SampleConsumer extends OauthPhirehose
         $data = json_decode($status, true);
         if (is_array($data))
         {
-            $url = $data['entities']['urls'][0]['expanded_url'] ?? null;
-            if($url != null)
+            $urls = $data['entities']['urls'] ?? null;
+            if($urls == null)
             {
+                return;
+            }
+            foreach($urls as $url)
+            {
+                $url = $url['expanded_url'] ?? null;
+                if($url == null)
+                {
+                    break;
+                }
+
                 $tomori = new Analyze($url);
 
                 // 解析する意味のあるURLか

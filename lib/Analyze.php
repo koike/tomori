@@ -81,6 +81,7 @@ class Analyze
         catch(\Exception $e)
         {
             var_dump($e);
+            Notificate::error($e);
             exit(-1);
         }
         echo '[Gist URL] ' . $this->gist_url;
