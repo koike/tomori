@@ -38,13 +38,9 @@ class Notificate
             $channel = urlencode('#error');
             $text = urlencode
             (
-                "[Error (" .
-                $no .
-                ")]\nfile:" .
-                $file .
-                " => line:" .
-                $line .
-                "\n```\n" .
+                "[Error (" . $no . ")]\n" .
+                "file:" . $file . " => line:" . $line . "\n" .
+                "```\n" .
                 $str .
                 "\n```"
             );
@@ -73,11 +69,19 @@ class Notificate
             ob_end_clean();
 
             $exception_dump = str_replace('```', '` ` `', $exception_dump);
+            $code = $e->getCode();
+            $file = $e->getFile();
+            $line = $e->getLine();
+            $trace = $e->getTraceAsString();
             $message = $e->getMessage();
             $text = urlencode
             (
-                "[Exception]\n" .
-                $message
+                "[Exception (" . $code . ")]\n" .
+                "file:" . $file . " => line:" . $line . "\n" .
+                $message . "\n" .
+                "```\n" .
+                $trace .
+                "\n```"
             );
 
             $url = 'https://slack.com/api/chat.postMessage?token=' .
