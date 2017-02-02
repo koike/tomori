@@ -98,6 +98,11 @@ class Analyze
             ]
         );
     }
+
+    public static function get_headers_handler()
+    {
+        echo '[!] Error: get_headers_handler()' . PHP_EOL;
+    }
     
     public static function extract_url(string $url) : string
     {
