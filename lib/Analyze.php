@@ -101,16 +101,23 @@ class Analyze
     
     public static function extract_url(string $url) : string
     {
-        $header = get_headers($url, 1);
-        if(isset($header['Location']))
+        try
         {
-            $url = $header['Location'];
-            if(is_array($url))
+            $header = get_headers($url, 1);
+            if(isset($header['Location']))
             {
-                $url = end($url);
+                $url = $header['Location'];
+                if(is_array($url))
+                {
+                    $url = end($url);
+                }
             }
+            return $url;
         }
-        return $url;
+        catch(\Exception $e)
+        {
+            return $url;
+        }
     }
     
     public function exclude_url() : bool
