@@ -24,7 +24,6 @@ class Notificate
                         $channel .
                         '&text=' .
                         $text;
-                $url = mb_convert_encoding($url, "UTF-8", "auto");
                 file_get_contents($url);
             }
         }
@@ -51,7 +50,6 @@ class Notificate
                     $channel .
                     '&text=' .
                     $text;
-            $url = mb_convert_encoding($url, "UTF-8", "auto");
             file_get_contents($url);
         }
     }
@@ -90,7 +88,6 @@ class Notificate
                     $channel .
                     '&text=' .
                     $text;
-            $url = mb_convert_encoding($url, "UTF-8", "auto");
             file_get_contents($url);
         }
     }
@@ -112,7 +109,6 @@ class Notificate
                     $channel .
                     '&text=' .
                     $text;
-            $url = mb_convert_encoding($url, "UTF-8", "auto");
             file_get_contents($url);
         }
 

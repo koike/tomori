@@ -61,6 +61,7 @@ class Analyze
 
     public function register_db($tweet = null)
     {
+        $tweet = mb_convert_encoding($tweet, "UTF-8", "auto");
         // データをgistにPOSTする
         $files =
         [
