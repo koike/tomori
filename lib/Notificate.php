@@ -113,7 +113,7 @@ class Notificate
         }
 
         // 無限に再起動するのを防ぐために一旦スリープする
-        sleep(5 * 60);
+        sleep(30);
         exec('nohup php tomori.php > /dev/null 2>&1 &', $arr, $res);
     }
 }

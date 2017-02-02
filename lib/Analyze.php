@@ -74,9 +74,7 @@ class Analyze
                 'content'   =>  json_encode($tweet) . ''
             ]
         ];
-        echo '[URL] ' . $this->url . PHP_EOL;
         $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
-        echo '[Gist] ' . $this->gist_url . PHP_EOL;
         
         DB::table('GIST')
         ->insert
@@ -97,14 +95,6 @@ class Analyze
                 'created_at'    =>  date('Y-m-d H:i:s')
             ]
         );
-    }
-
-    public static function get_headers_handler($no, $str, $file, $line, $context)
-    {
-        echo '[!] Error: get_headers_handler()' . PHP_EOL;
-        echo '    ' . $no . ': ' . $file . ' => ' . $line . PHP_EOL;
-        echo '    ' . json_encode($context);
-        exit(-1);
     }
     
     public static function extract_url(string $url) : string

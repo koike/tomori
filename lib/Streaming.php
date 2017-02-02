@@ -20,27 +20,25 @@ class SampleConsumer extends OauthPhirehose
                     break;
                 }
 
-                // // 短縮URLの場合は再帰的に展開する
-                // while
-                // (
-                //     // goo.gl
-                //     preg_match("/https?:\/\/goo\.gl/", $url) ||
-                //     // bit.ly
-                //     preg_match("/^https?:\/\/bit\.ly/", $url) ||
-                //     // ift.tt
-                //     preg_match("/^https?:\/\/ift\.tt/", $url) ||
-                //     // ln.is
-                //     preg_match("/^https?:\/\/ln\.is/", $url) ||
-                //     // dlvr.it
-                //     preg_match("/^https?:\/\/dlvr\.it/", $url) ||
-                //     // ow.ly
-                //     preg_match("/^https?:\/\/ow\.ly/", $url)
-                // )
-                // {
-                //     // set_error_handler('Analyze::get_headers_handler');
-                //     // $url = Analyze::extract_url($url);
-                //     // restore_error_handler();
-                // }
+                // 短縮URLの場合は再帰的に展開する
+                while
+                (
+                    // goo.gl
+                    preg_match("/https?:\/\/goo\.gl/", $url) ||
+                    // bit.ly
+                    preg_match("/^https?:\/\/bit\.ly/", $url) ||
+                    // ift.tt
+                    preg_match("/^https?:\/\/ift\.tt/", $url) ||
+                    // ln.is
+                    preg_match("/^https?:\/\/ln\.is/", $url) ||
+                    // dlvr.it
+                    preg_match("/^https?:\/\/dlvr\.it/", $url) ||
+                    // ow.ly
+                    preg_match("/^https?:\/\/ow\.ly/", $url)
+                )
+                {
+                    $url = Analyze::extract_url($url);
+                }
 
                 $tomori = new Analyze($url);
 
