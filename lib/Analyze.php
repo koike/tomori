@@ -103,7 +103,8 @@ class Analyze
     {
         echo '[!] Error: get_headers_handler()' . PHP_EOL;
         echo '    ' . $no . ': ' . $file . ' => ' . $line . PHP_EOL;
-        echo '    ' . $context;
+        echo '    ' . json_encode($context);
+        exit(-1);
     }
     
     public static function extract_url(string $url) : string
