@@ -61,20 +61,16 @@ class Analyze
     
     public function register_db($tweet = null)
     {
-        ob_start();
-        var_dump($tweet);
-        $tweet_dump = ob_get_contents();
-        ob_end_clean();
         // データをgistにPOSTする
         $files =
         [
             "data.html" =>
             [
-                'content'   =>  base64_encode($this->html) . ''
+                'content'   =>  $this->html
             ],
                 'tweet.json' =>
             [
-                'content'   =>  base64_encode($tweet_dump) . ''
+                'content'   =>  json_encode($tweet)
             ]
         ];
         $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
