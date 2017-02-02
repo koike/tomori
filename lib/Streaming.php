@@ -20,8 +20,11 @@ class SampleConsumer extends OauthPhirehose
                     break;
                 }
 
-                // 短縮URLの場合は展開する
-                if(
+                // 短縮URLの場合は再帰的に展開する
+                while
+                (
+                    // goo.gl
+                    preg_match("/^http:\/\/goo\.gl/",$url) ||
                     // bit.ly
                     preg_match("/^http:\/\/bit\.ly/",$url) ||
                     // ift.tt
