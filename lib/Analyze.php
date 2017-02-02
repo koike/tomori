@@ -65,7 +65,7 @@ class Analyze
         var_dump($tweet);
         $tweet_dump = ob_get_contents();
         ob_end_clean();
-        $tweet_dump = mb_convert_encoding($tweet_dump, "UTF-8", "auto");
+        $tweet_dump = utf8_encode($tweet_dump);
         // データをgistにPOSTする
         $files =
         [
