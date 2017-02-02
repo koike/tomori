@@ -114,6 +114,7 @@ class Notificate
 
         // 無限に再起動するのを防ぐために一旦スリープする
         sleep(1 * 60);
-        exec('nohup php tomori.php > /dev/null 2>&1 &', $arr, $res);
+        // exec('nohup php tomori.php > /dev/null 2>&1 &', $arr, $res);
+        exec('php tomori.php');
     }
 }
