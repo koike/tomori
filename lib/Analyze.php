@@ -129,15 +129,7 @@ class Analyze
         // white listに含まれている場合は解析する必要なし
         foreach($white_list as $domain)
         {
-            if
-            (
-                strpos
-                (
-                    substr($url, 0, strlen('https://' . $domain['domain'])) . '/',
-                    '://' . $domain['domain'] . '/'
-                )
-                !== false
-            )
+            if(preg_match('/https?:\/\/' . str_replace('.', '\.', $domain['domain']) . '\//', $url))
             {
                 return false;
             }
