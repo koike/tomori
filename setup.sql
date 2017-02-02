@@ -127,3 +127,7 @@ INSERT INTO WHITE_LIST VALUES
 (
     'www.marca.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'imgur.com'
+);
