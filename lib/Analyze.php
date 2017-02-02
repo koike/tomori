@@ -99,9 +99,11 @@ class Analyze
         );
     }
 
-    public static function get_headers_handler()
+    public static function get_headers_handler($no, $str, $file, $line, $context)
     {
         echo '[!] Error: get_headers_handler()' . PHP_EOL;
+        echo '    ' . $no . ': ' . $file . ' => ' . $line . PHP_EOL;
+        echo '    ' . $context;
     }
     
     public static function extract_url(string $url) : string
