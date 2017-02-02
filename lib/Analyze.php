@@ -66,11 +66,11 @@ class Analyze
         [
             "data.html" =>
             [
-                'content'   =>  $this->html
+                'content'   =>  $this->html . ''
             ],
-                'tweet.json' =>
+            'tweet.json' =>
             [
-                'content'   =>  json_encode($tweet)
+                'content'   =>  json_encode($tweet) . ''
             ]
         ];
         $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
