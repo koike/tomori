@@ -20,6 +20,9 @@ class SampleConsumer extends OauthPhirehose
                     break;
                 }
 
+                // 短縮URLの場合は展開する
+                $url = Analyze::extract_url($url);
+
                 $tomori = new Analyze($url);
 
                 // 解析する意味のあるURLか
