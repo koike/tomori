@@ -112,6 +112,8 @@ class Notificate
             file_get_contents($url);
         }
 
+        // 無限に再起動するのを防ぐために一旦スリープする
+        sleep(10 * 60);
         exec('nohup php tomori.php > /dev/null 2>&1 &', $arr, $res);
     }
 }
