@@ -32,7 +32,9 @@ class SampleConsumer extends OauthPhirehose
                     // ln.is
                     preg_match("/^https?:\/\/ln\.is/", $url) ||
                     // dlvr.it
-                    preg_match("/^https?:\/\/dlvr\.it/", $url)
+                    preg_match("/^https?:\/\/dlvr\.it/", $url) ||
+                    // ow.ly
+                    preg_match("/^https?:\/\/ow\.ly/", $url)
                 )
                 {
                     set_error_handler('Analyze::get_headers_handler');
