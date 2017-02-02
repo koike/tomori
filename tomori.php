@@ -12,7 +12,15 @@ function error_handler($no, $str, $file, $line)
 
 function exception_handler($e)
 {
-    Notificate::exception($e);
+    $class = get_class($e);
+    if($class == 'Exception')
+    {
+        Notificate::exception($e);
+    }
+    else if($class == 'Error')
+    {
+        echo '[exception_handler] Error given...';
+    }
     exit(-1);
 }
 
