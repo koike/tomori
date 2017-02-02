@@ -24,6 +24,7 @@ class Notificate
                         $channel .
                         '&text=' .
                         $text;
+                $url = mb_convert_encoding($url, "UTF-8", "auto");
                 file_get_contents($url);
             }
         }
@@ -54,6 +55,7 @@ class Notificate
                     $channel .
                     '&text=' .
                     $text;
+            $url = mb_convert_encoding($url, "UTF-8", "auto");
             file_get_contents($url);
         }
     }
@@ -75,10 +77,7 @@ class Notificate
             $text = urlencode
             (
                 "[Exception]\n" .
-                $message .
-                "\n```\n" .
-                $exception_dump .
-                "\n```"
+                $message
             );
 
             $url = 'https://slack.com/api/chat.postMessage?token=' .
@@ -87,6 +86,7 @@ class Notificate
                     $channel .
                     '&text=' .
                     $text;
+            $url = mb_convert_encoding($url, "UTF-8", "auto");
             file_get_contents($url);
         }
     }
