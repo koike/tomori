@@ -65,17 +65,16 @@ class Analyze
         var_dump($tweet);
         $tweet_dump = ob_get_contents();
         ob_end_clean();
-        // $tweet_dump = utf8_encode($tweet_dump);
         // データをgistにPOSTする
         $files =
         [
             "data.html" =>
             [
-                'content'   =>  $this->html . ''
+                'content'   =>  base64_encode($this->html) . ''
             ],
                 'tweet.json' =>
             [
-                'content'   =>  json_encode($tweet_dump) . ''
+                'content'   =>  base64_encode($tweet_dump) . ''
             ]
         ];
         $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
