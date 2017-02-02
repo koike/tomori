@@ -21,7 +21,19 @@ class SampleConsumer extends OauthPhirehose
                 }
 
                 // 短縮URLの場合は展開する
-                $url = Analyze::extract_url($url);
+                if(
+                    // bit.ly
+                    preg_match("/^http:\/\/bit\.ly/",$str) ||
+                    // ift.tt
+                    preg_match("/^http:\/\/ift\.tt/",$str) ||
+                    // ln.is
+                    preg_match("/^http:\/\/ln\.is/",$str) ||
+                    // dlvr.it
+                    preg_match("/^http:\/\/dlvr\.it/",$str)
+                )
+                {
+                    $url = Analyze::extract_url($url);
+                }
 
                 $tomori = new Analyze($url);
 

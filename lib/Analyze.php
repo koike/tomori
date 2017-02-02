@@ -65,14 +65,14 @@ class Analyze
         // データをgistにPOSTする
         $files =
         [
-        "data.html" =>
-        [
-        'content'   =>  $this->html . ''
-        ],
-        'tweet.json' =>
-        [
-        'content'   =>  json_encode($tweet) . ''
-        ]
+            "data.html" =>
+            [
+                'content'   =>  $this->html . ''
+            ],
+                'tweet.json' =>
+            [
+                'content'   =>  json_encode($tweet) . ''
+            ]
         ];
         echo '[URL] ' . $this->url . PHP_EOL;
         $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
@@ -81,21 +81,21 @@ class Analyze
         DB::table('GIST')
         ->insert
         (
-        [
-        'url'           =>  $this->url,
-        'gist'          =>  $this->gist_url,
-        'created_at'    =>  date('Y-m-d H:i:s')
-        ]
+            [
+                'url'           =>  $this->url,
+                'gist'          =>  $this->gist_url,
+                'created_at'    =>  date('Y-m-d H:i:s')
+            ]
         );
         
         DB::table('RESULT')
         ->insert
         (
-        [
-        'url'           =>  $this->url,
-        'description'   =>  $this->description,
-        'created_at'    =>  date('Y-m-d H:i:s')
-        ]
+            [
+                'url'           =>  $this->url,
+                'description'   =>  $this->description,
+                'created_at'    =>  date('Y-m-d H:i:s')
+            ]
         );
     }
     
@@ -120,23 +120,23 @@ class Analyze
         // ドメインのwhite listを取得
         $white_list = json_decode
         (
-        json_encode
-        (
-        DB::table('WHITE_LIST')->get()
-        ),
-        true
+            json_encode
+            (
+                DB::table('WHITE_LIST')->get()
+            ),
+            true
         );
         // white listに含まれている場合は解析する必要なし
         foreach($white_list as $domain)
         {
             if
             (
-            strpos
-            (
-            substr($url, 0, strlen('https://' . $domain['domain'])) . '/',
-            '://' . $domain['domain'] . '/'
-            )
-            !== false
+                strpos
+                (
+                    substr($url, 0, strlen('https://' . $domain['domain'])) . '/',
+                    '://' . $domain['domain'] . '/'
+                )
+                !== false
             )
             {
                 return false;
