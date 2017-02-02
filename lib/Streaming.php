@@ -23,13 +23,13 @@ class SampleConsumer extends OauthPhirehose
                 // 短縮URLの場合は展開する
                 if(
                     // bit.ly
-                    preg_match("/^http:\/\/bit\.ly/",$str) ||
+                    preg_match("/^http:\/\/bit\.ly/",$url) ||
                     // ift.tt
-                    preg_match("/^http:\/\/ift\.tt/",$str) ||
+                    preg_match("/^http:\/\/ift\.tt/",$url) ||
                     // ln.is
-                    preg_match("/^http:\/\/ln\.is/",$str) ||
+                    preg_match("/^http:\/\/ln\.is/",$url) ||
                     // dlvr.it
-                    preg_match("/^http:\/\/dlvr\.it/",$str)
+                    preg_match("/^http:\/\/dlvr\.it/",$url)
                 )
                 {
                     $url = Analyze::extract_url($url);
