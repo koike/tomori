@@ -24,20 +24,20 @@ class SampleConsumer extends OauthPhirehose
                 while
                 (
                     // goo.gl
-                    preg_match("/https?:\/\/goo\.gl/",$url) ||
+                    preg_match("/https?:\/\/goo\.gl/", $url) ||
                     // bit.ly
-                    preg_match("/^https?:\/\/bit\.ly/",$url) ||
+                    preg_match("/^https?:\/\/bit\.ly/", $url) ||
                     // ift.tt
-                    preg_match("/^https?:\/\/ift\.tt/",$url) ||
+                    preg_match("/^https?:\/\/ift\.tt/", $url) ||
                     // ln.is
-                    preg_match("/^https?:\/\/ln\.is/",$url) ||
+                    preg_match("/^https?:\/\/ln\.is/", $url) ||
                     // dlvr.it
-                    preg_match("/^https?:\/\/dlvr\.it/",$url)
+                    preg_match("/^https?:\/\/dlvr\.it/", $url)
                 )
                 {
-                    set_error_handler('Analyze::get_headers_handler');
-                    $url = Analyze::extract_url($url);
-                    restore_error_handler();
+                    // set_error_handler('Analyze::get_headers_handler');
+                    // $url = Analyze::extract_url($url);
+                    // restore_error_handler();
                 }
 
                 $tomori = new Analyze($url);
