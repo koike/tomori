@@ -98,11 +98,6 @@ class Analyze
             ]
         );
     }
-
-    public static function get_headers_handler()
-    {
-        //
-    }
     
     public static function extract_url(string $url) : string
     {

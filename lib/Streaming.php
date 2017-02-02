@@ -36,7 +36,7 @@ class SampleConsumer extends OauthPhirehose
                 )
                 {
                     // set_error_handler('Analyze::get_headers_handler');
-                    // $url = Analyze::extract_url($url);
+                    $url = Analyze::extract_url($url);
                     // restore_error_handler();
                 }
 
