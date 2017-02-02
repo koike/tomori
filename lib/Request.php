@@ -40,7 +40,7 @@ class Request
             [
                 'status'    =>  $response->getStatusCode(),
                 'type'      =>  $response->getHeader('Content-Type'),
-                'body'      =>  $response->getBody()
+                'body'      =>  mb_convert_encoding($response->getBody(), "UTF-8", "auto")
             ];
         }
         catch(\Exception $e)
