@@ -37,9 +37,12 @@ class SampleConsumer extends OauthPhirehose
                     preg_match("/^https?:\/\/ow\.ly/", $url)
                 )
                 {
-                    echo 'start' . PHP_EOL;
-                    $url = Request::extract_url($url);
-                    echo 'end' . PHP_EOL;
+                    $extract = Request::extract_url($url);
+                    if($extract == $url)
+                    {
+                        return;
+                    }
+                    $url = $extract;
                 }
 
                 $tomori = new Analyze($url);
