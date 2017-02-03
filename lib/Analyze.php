@@ -61,7 +61,6 @@ class Analyze
     
     public function register_db($tweet = null)
     {
-        $tweet = mb_convert_encoding($tweet, "UTF-8", "auto");
         // データをgistにPOSTする
         $files =
         [
@@ -69,11 +68,18 @@ class Analyze
             [
                 'content'   =>  $this->html . ''
             ],
-                'tweet.json' =>
+            'tweet.json' =>
             [
                 'content'   =>  json_encode($tweet) . ''
             ]
         ];
+
+        ob_start();
+        var_dump($files);
+        $files_dump = ob_get_contents();
+        ob_end_clean();
+        file_put_contents($files_dump, 'dump.log');
+
         $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
         
         DB::table('GIST')
