@@ -147,3 +147,7 @@ INSERT INTO WHITE_LIST VALUES
 (
     'i.imgur.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'www.showroom-live.com'
+);
