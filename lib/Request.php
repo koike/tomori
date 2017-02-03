@@ -58,14 +58,12 @@ class Request
     {
         if(!is_string($url) || strlen($url) == 0)
         {
-            echo '0' . PHP_EOL;
             return $url;
         }
 
         $ua = 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648)';
         $ref = $url;
 
-        echo '1' . PHP_EOL;
         $client = new Client(['verify' => false]);
         try
         {
@@ -83,13 +81,10 @@ class Request
                 ]
             );
 
-            echo '2' . PHP_EOL;
-
             $headers = $response->getHeaders();
             $location = $headers['Location'] ?? null;
             if($location == null)
             {
-                echo '3' . PHP_EOL;
                 return $url;
             }
 
@@ -103,12 +98,11 @@ class Request
                 $location = $url . $location;
             }
 
-            echo '4' . PHP_EOL;
             return $location;
         }
         catch(\Exception $e)
         {
-            echo '5' . PHP_EOL;
+            echo $e->getMessage();
             return $url;
         }
     }
