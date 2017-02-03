@@ -86,7 +86,7 @@ class Request
             $location = [];
             foreach($headers as $line)
             {
-                if(preg_grep('/^HTTP\/1\.[0-1] 4/', $line))
+                if(preg_match('/^HTTP\/1\.[0-1] 4/', $line))
                 {
                     return $url;
                 }
