@@ -20,6 +20,8 @@ class SampleConsumer extends OauthPhirehose
                     break;
                 }
 
+                echo $url . PHP_EOL;
+
                 // 短縮URLの場合は再帰的に展開する
                 while
                 (
