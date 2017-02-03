@@ -77,6 +77,10 @@ class Request
             try
             {
                 @$fp = fopen($url, 'r', false, $context);
+                if (!$fp)
+                {
+                    throw new Exception('failed to open stream');
+                }
                 $headers = stream_get_meta_data($fp)['wrapper_data'];
             }
             catch(\Exception $e)
