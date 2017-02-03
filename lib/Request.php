@@ -58,7 +58,7 @@ class Request
     {
         if(!is_string($url) || strlen($url) == 0)
         {
-            return $url;
+            return null;
         }
 
         $ua = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36';
@@ -70,7 +70,8 @@ class Request
             [
                 'method' => 'GET',
                 'header' => 'User-Agent: ' . $ua,
-                'timeout' => 5
+                'timeout' => 5,
+                'ignore_errors' => true
             ];
             $context = stream_context_create($opts);
             try
@@ -92,7 +93,7 @@ class Request
                 }
                 if(preg_match('/^Location:/', $line))
                 {
-                    array_push($location, str_replace('Location: ', '', $line));
+                    array_push($location, trim(str_replace('Location: ', '', $line)));
                 }
             }
             if(empty($location))
