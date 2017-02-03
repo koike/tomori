@@ -23,34 +23,46 @@ class SampleConsumer extends OauthPhirehose
                 // urlを小文字に変換
                 $url = mb_strtolower($url);
 
+                // 解析する価値がない
+                if($url == 'http://ow.ly' || $url == 'http://ow.ly/url/shorten-url')
+                {
+                    return;
+                }
+
+                // 展開先がループした場合のカウンタ
+                $count = 0;
+
                 // Rate Limitに掛かるのでomit
-                // 短縮URLの場合は再帰的に展開する
+                // 短縮URLの場合は3回まで展開する
                 while
                 (
-                    // goo.gl
-                    preg_match("/^https?:\/\/goo\.gl/", $url) ||
-                    // bit.ly
-                    preg_match("/^https?:\/\/bit\.ly/", $url) ||
-                    // ift.tt
-                    preg_match("/^https?:\/\/ift\.tt/", $url) ||
-                    // ln.is
-                    preg_match("/^https?:\/\/ln\.is/", $url) ||
-                    // dlvr.it
-                    preg_match("/^https?:\/\/dlvr\.it/", $url) ||
-                    // ow.ly
-                    preg_match("/^https?:\/\/ow\.ly/", $url) ||
-                    // j.mp
-                    preg_match("/^https?:\/\/j\.mp/", $url)
+                    (
+                        // goo.gl
+                        preg_match("/^https?:\/\/goo\.gl/", $url) ||
+                        // bit.ly
+                        preg_match("/^https?:\/\/bit\.ly/", $url) ||
+                        // ift.tt
+                        preg_match("/^https?:\/\/ift\.tt/", $url) ||
+                        // ln.is
+                        preg_match("/^https?:\/\/ln\.is/", $url) ||
+                        // dlvr.it
+                        preg_match("/^https?:\/\/dlvr\.it/", $url) ||
+                        // ow.ly
+                        preg_match("/^https?:\/\/ow\.ly/", $url) ||
+                        // j.mp
+                        preg_match("/^https?:\/\/j\.mp/", $url)
+                    )
+                    &&
+                    $count < 3
                 )
                 {
-                    echo 'url => ' . $url . PHP_EOL;
                     $extract = Request::extract_url($url);
                     if($extract == null || $extract == $url)
                     {
                         break;
                     }
                     $url = $extract;
-                    echo 'extract => ' . $url . PHP_EOL;
+                    $count++;
                 }
 
                 $tomori = new Analyze($url);
