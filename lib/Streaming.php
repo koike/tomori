@@ -23,6 +23,7 @@ class SampleConsumer extends OauthPhirehose
                 // urlを小文字に変換
                 $url = mb_strtolower($url);
 
+                echo 0;
                 // Rate Limitに掛かるのでomit
                 // 短縮URLの場合は再帰的に展開する
                 while
@@ -50,6 +51,7 @@ class SampleConsumer extends OauthPhirehose
                     }
                     $url = $extract;
                 }
+                echo 1;
 
                 $tomori = new Analyze($url);
 
@@ -86,21 +88,20 @@ class SampleConsumer extends OauthPhirehose
                     $tomori = new Analyze($url);
                     $tomori->analyze($response);
                     
-                    echo 0;
                     if($tomori->get_is_mallicious())
                     {
-                        echo 1;
                         $tomori->register_db($data);
-                        echo 2;
                         Notificate::slack($tomori);
-                        echo 3;
                         echo '[*] ' . $url . PHP_EOL;
                     }
                     else
                     {
-                        echo 3;
                         echo '[-] ' . $url . PHP_EOL;
                     }
+                }
+                else
+                {
+                    echo PHP_EOL;
                 }
             }
         }
