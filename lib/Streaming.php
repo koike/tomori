@@ -23,50 +23,40 @@ class SampleConsumer extends OauthPhirehose
                 // urlを小文字に変換
                 $url = mb_strtolower($url);
 
-                // 解析する価値がない
-                if
-                (
-                    preg_match('/^https?:\/\/ow\.ly$/', $url) ||
-                    preg_match('/^https?:\/\/ow\.ly\/$/', $url) ||
-                    preg_match('/^https?:\/\/ow\.ly\/url\/shorten-url$/', $url) ||
-                    preg_match('/^https?:\/\/ow\.ly\/url\/shorten-url\/$/', $url)
-                )
-                {
-                    return;
-                }
-
-                // 展開先がループした場合のカウンタ
+                // 無限に展開しないように
                 $count = 0;
-
-                // 短縮URLの場合は3回まで展開する
+                // 短縮URLの場合は再帰的に展開する
                 while
                 (
-                    (
-                        // goo.gl
-                        preg_match("/^https?:\/\/goo\.gl/", $url) ||
-                        // bit.ly
-                        preg_match("/^https?:\/\/bit\.ly/", $url) ||
-                        // ift.tt
-                        preg_match("/^https?:\/\/ift\.tt/", $url) ||
-                        // ln.is
-                        preg_match("/^https?:\/\/ln\.is/", $url) ||
-                        // dlvr.it
-                        preg_match("/^https?:\/\/dlvr\.it/", $url) ||
-                        // ow.ly
-                        preg_match("/^https?:\/\/ow\.ly/", $url) ||
-                        // j.mp
-                        preg_match("/^https?:\/\/j\.mp/", $url)
-                    )
-                    &&
-                    $count < 3
+                    // goo.gl
+                    preg_match("/^https?:\/\/goo\.gl\/[a-zA-Z0-1]/", $url) ||
+                    // bit.ly
+                    preg_match("/^https?:\/\/bit\.ly\/[a-zA-Z0-1]/", $url) ||
+                    // ift.tt
+                    preg_match("/^https?:\/\/ift\.tt\/[a-zA-Z0-1]/", $url) ||
+                    // ln.is
+                    preg_match("/^https?:\/\/ln\.is\/[a-zA-Z0-1]/", $url) ||
+                    // dlvr.it
+                    preg_match("/^https?:\/\/dlvr\.it\/[a-zA-Z0-1]/", $url) ||
+                    // ow.ly
+                    preg_match("/^https?:\/\/ow\.ly\/[a-zA-Z0-1]/", $url) ||
+                    // j.mp
+                    preg_match("/^https?:\/\/j\.mp\/[a-zA-Z0-1]/", $url)
                 )
                 {
+                    // 3回以上展開すると無限にループする可能性が高いので中断
+                    if($count == 3)
+                    {
+                        break;
+                    }
+
                     $extract = Request::extract_url($url);
                     if($extract == null || $extract == $url)
                     {
                         break;
                     }
                     $url = $extract;
+
                     $count++;
                 }
 
