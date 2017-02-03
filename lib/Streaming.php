@@ -21,30 +21,30 @@ class SampleConsumer extends OauthPhirehose
                 }
 
                 // Rate Limitに掛かるのでomit
-                // 短縮URLの場合は再帰的に展開する
-                while
-                (
-                    // // goo.gl
-                    // preg_match("/^https?:\/\/goo\.gl/", $url) ||
-                    // bit.ly
-                    preg_match("/^https?:\/\/bit\.ly/", $url) ||
-                    // ift.tt
-                    preg_match("/^https?:\/\/ift\.tt/", $url) ||
-                    // ln.is
-                    preg_match("/^https?:\/\/ln\.is/", $url) ||
-                    // dlvr.it
-                    preg_match("/^https?:\/\/dlvr\.it/", $url) ||
-                    // ow.ly
-                    preg_match("/^https?:\/\/ow\.ly/", $url)
-                )
-                {
-                    $extract = Request::extract_url($url);
-                    if($extract == $url)
-                    {
-                        return;
-                    }
-                    $url = $extract;
-                }
+                // // 短縮URLの場合は再帰的に展開する
+                // while
+                // (
+                //     // goo.gl
+                //     preg_match("/^https?:\/\/goo\.gl/", $url) ||
+                //     // bit.ly
+                //     preg_match("/^https?:\/\/bit\.ly/", $url) ||
+                //     // ift.tt
+                //     preg_match("/^https?:\/\/ift\.tt/", $url) ||
+                //     // ln.is
+                //     preg_match("/^https?:\/\/ln\.is/", $url) ||
+                //     // dlvr.it
+                //     preg_match("/^https?:\/\/dlvr\.it/", $url) ||
+                //     // ow.ly
+                //     preg_match("/^https?:\/\/ow\.ly/", $url)
+                // )
+                // {
+                //     $extract = Request::extract_url($url);
+                //     if($extract == $url)
+                //     {
+                //         return;
+                //     }
+                //     $url = $extract;
+                // }
 
                 $tomori = new Analyze($url);
 
