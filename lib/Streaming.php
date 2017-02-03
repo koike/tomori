@@ -29,19 +29,19 @@ class SampleConsumer extends OauthPhirehose
                 while
                 (
                     // goo.gl
-                    preg_match("/^https?:\/\/goo\.gl\/[a-zA-Z0-1]/", $url) ||
+                    preg_match("/^https?:\/\/goo\.gl\/[a-zA-Z0-9]/", $url) ||
                     // bit.ly
-                    preg_match("/^https?:\/\/bit\.ly\/[a-zA-Z0-1]/", $url) ||
+                    preg_match("/^https?:\/\/bit\.ly\/[a-zA-Z0-9]/", $url) ||
                     // ift.tt
-                    preg_match("/^https?:\/\/ift\.tt\/[a-zA-Z0-1]/", $url) ||
+                    preg_match("/^https?:\/\/ift\.tt\/[a-zA-Z0-9]/", $url) ||
                     // ln.is
-                    preg_match("/^https?:\/\/ln\.is\/[a-zA-Z0-1]/", $url) ||
+                    preg_match("/^https?:\/\/ln\.is\/[a-zA-Z0-9]/", $url) ||
                     // dlvr.it
-                    preg_match("/^https?:\/\/dlvr\.it\/[a-zA-Z0-1]/", $url) ||
+                    preg_match("/^https?:\/\/dlvr\.it\/[a-zA-Z0-9]/", $url) ||
                     // ow.ly
-                    preg_match("/^https?:\/\/ow\.ly\/[a-zA-Z0-1]/", $url) ||
+                    preg_match("/^https?:\/\/ow\.ly\/[a-zA-Z0-9]/", $url) ||
                     // j.mp
-                    preg_match("/^https?:\/\/j\.mp\/[a-zA-Z0-1]/", $url)
+                    preg_match("/^https?:\/\/j\.mp\/[a-zA-Z0-9]/", $url)
                 )
                 {
                     // 3回以上展開すると無限にループする可能性が高いので中断
