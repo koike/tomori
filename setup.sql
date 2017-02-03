@@ -57,6 +57,10 @@ INSERT INTO WHITE_LIST VALUES
 );
 INSERT INTO WHITE_LIST VALUES
 (
+    'instagram.com'
+);
+INSERT INTO WHITE_LIST VALUES
+(
     'www.instagram.com'
 );
 INSERT INTO WHITE_LIST VALUES
@@ -162,4 +166,28 @@ INSERT INTO WHITE_LIST VALUES
 INSERT INTO WHITE_LIST VALUES
 (
     'play.google.com'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'nico.ms'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'naver.me'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'twitpic.com'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'abema.tv'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'www.yahoo.com'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'www.yahoo.co.jp'
 );
