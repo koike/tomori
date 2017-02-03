@@ -80,7 +80,7 @@ class Request
             if(!preg_match('/^https?:\/\//', $extract_url))
             {
                 $domain = parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
-                $extract_url = $domain . '://' . $extract_url;
+                $extract_url = $domain . $extract_url;
             }
             
             return $extract_url;
