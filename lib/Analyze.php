@@ -124,6 +124,23 @@ class Analyze
                 return false;
             }
         }
+
+        // 拡張子が明らかにhtmlではないものは弾く
+        if
+        (
+            preg_match('/\.jpg$/', $url) ||
+            preg_match('/\.png$/', $url) ||
+            preg_match('/\.bmp$/', $url) ||
+            preg_match('/\.zip$/', $url) ||
+            preg_match('/\.rar$/', $url) ||
+            preg_match('/\.exe$/', $url) ||
+            preg_match('/\.mp3$/', $url) ||
+            preg_match('/\.mp4$/', $url) ||
+            preg_match('/\.json$/', $url)
+        )
+        {
+            return false;
+        }
         
         return true;
     }
