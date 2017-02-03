@@ -73,8 +73,15 @@ class Request
                 'timeout' => 5
             ];
             $context = stream_context_create($opts);
-            $fp = fopen($url, 'r', false, $context);
-            $headers = stream_get_meta_data($fp)['wrapper_data'];
+            try
+            {
+                $fp = fopen($url, 'r', false, $context);
+                $headers = stream_get_meta_data($fp)['wrapper_data'];
+            }
+            catch(\Exception $e)
+            {
+                return $url;
+            }
 
             $location = [];
             foreach($headers as $line)
