@@ -20,8 +20,6 @@ class SampleConsumer extends OauthPhirehose
                     break;
                 }
 
-                echo $url . PHP_EOL;
-
                 // 短縮URLの場合は再帰的に展開する
                 while
                 (
@@ -39,7 +37,9 @@ class SampleConsumer extends OauthPhirehose
                     preg_match("/^https?:\/\/ow\.ly/", $url)
                 )
                 {
+                    echo 'start' . PHP_EOL;
                     $url = Request::extract_url($url);
+                    echo 'end' . PHP_EOL;
                 }
 
                 $tomori = new Analyze($url);
