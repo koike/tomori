@@ -74,13 +74,13 @@ class Request
                 'ignore_errors' =>  true
             ];
             $context = stream_context_create($opts);
-            file_get_contents($url, false, $context);
+            @file_get_contents($url, false, $context);
             $headers = $http_response_header;
 
             $location = [];
             foreach($headers as $line)
             {
-                if(preg_match('/^HTTP\/1\.[0-1] 4/', $line))
+                if(preg_match('/^HTTP\/1\.[0-1] [4-5]/', $line))
                 {
                     return null;
                 }
