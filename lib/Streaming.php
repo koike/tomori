@@ -82,22 +82,23 @@ class SampleConsumer extends OauthPhirehose
                         ]
                     );
 
-                    echo 0;
                     $response = Request::get($url);
-                    echo 1;
                     $tomori = new Analyze($url);
-                    echo 2;
                     $tomori->analyze($response);
-                    echo 3;
                     
+                    echo 0;
                     if($tomori->get_is_mallicious())
                     {
+                        echo 1;
                         $tomori->register_db($data);
+                        echo 2;
                         Notificate::slack($tomori);
+                        echo 3;
                         echo '[*] ' . $url . PHP_EOL;
                     }
                     else
                     {
+                        echo 3;
                         echo '[-] ' . $url . PHP_EOL;
                     }
                 }
