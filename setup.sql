@@ -199,3 +199,15 @@ INSERT INTO WHITE_LIST VALUES
 (
     'shindanmaker.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'tmblr.com'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'tmblr.co'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'www.tumblr.com'
+);

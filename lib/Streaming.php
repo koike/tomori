@@ -23,6 +23,19 @@ class SampleConsumer extends OauthPhirehose
                 // urlを小文字に変換
                 $url = mb_strtolower($url);
 
+                // linkisは余計な部分を取り除く
+                if(preg_match('/^https?:\/\/linkis\.com\/[a-zA-Z0-9]/', $url))
+                {
+                    if(substr($url, 0, 5) === 'https')
+                    {
+                        $url = substr($url, 19);
+                    }
+                    else
+                    {
+                        $url = substr($url, 18);
+                    }
+                }
+
                 // 無限に展開しないように
                 $count = 0;
                 // 短縮URLの場合は再帰的に展開する
@@ -49,7 +62,9 @@ class SampleConsumer extends OauthPhirehose
                     // trib.al
                     preg_match("/^https?:\/\/trib\.al\/[a-zA-Z0-9]/", $url) ||
                     // is.gd
-                    preg_match("/^https?:\/\/is\.gd\/[a-zA-Z0-9]/", $url)
+                    preg_match("/^https?:\/\/is\.gd\/[a-zA-Z0-9]/", $url) ||
+                    // tinyurl.com
+                    preg_match("/^https?:\/\/tinyurl\.com\/[a-zA-Z0-9]/", $url)
                 )
                 {
                     // 3回以上展開すると無限にループする可能性が高いので中断
