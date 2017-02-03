@@ -24,7 +24,7 @@ class SampleConsumer extends OauthPhirehose
                 while
                 (
                     // goo.gl
-                    preg_match("/https?:\/\/goo\.gl/", $url) ||
+                    preg_match("/^https?:\/\/goo\.gl/", $url) ||
                     // bit.ly
                     preg_match("/^https?:\/\/bit\.ly/", $url) ||
                     // ift.tt
@@ -37,7 +37,7 @@ class SampleConsumer extends OauthPhirehose
                     preg_match("/^https?:\/\/ow\.ly/", $url)
                 )
                 {
-                    $url = Analyze::extract_url($url);
+                    $url = Request::extract_url($url);
                 }
 
                 $tomori = new Analyze($url);

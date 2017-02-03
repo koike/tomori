@@ -103,27 +103,6 @@ class Analyze
         );
     }
     
-    public static function extract_url(string $url) : string
-    {
-        try
-        {
-            $header = get_headers($url, 1);
-            if(isset($header['Location']))
-            {
-                $url = $header['Location'];
-                if(is_array($url))
-                {
-                    $url = end($url);
-                }
-            }
-            return $url;
-        }
-        catch(\Exception $e)
-        {
-            return $url;
-        }
-    }
-    
     public function exclude_url() : bool
     {
         $url = $this->url;
