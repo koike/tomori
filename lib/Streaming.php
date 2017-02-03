@@ -26,10 +26,10 @@ class SampleConsumer extends OauthPhirehose
                 // 解析する価値がない
                 if
                 (
-                    preg_match('/^https?:\/\/ow\.ly$/') ||
-                    preg_match('/^https?:\/\/ow\.ly\/$/') ||
-                    preg_match('/^https?:\/\/ow\.ly\/url\/shorten-url$/') ||
-                    preg_match('/^https?:\/\/ow\.ly\/url\/shorten-url\/$/')
+                    preg_match('/^https?:\/\/ow\.ly$/', $url) ||
+                    preg_match('/^https?:\/\/ow\.ly\/$/', $url) ||
+                    preg_match('/^https?:\/\/ow\.ly\/url\/shorten-url$/', $url) ||
+                    preg_match('/^https?:\/\/ow\.ly\/url\/shorten-url\/$/', $url)
                 )
                 {
                     return;
