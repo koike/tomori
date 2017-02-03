@@ -43,7 +43,9 @@ class SampleConsumer extends OauthPhirehose
                     // j.mp
                     preg_match("/^https?:\/\/j\.mp\/[a-zA-Z0-9]/", $url) ||
                     // buff.ly
-                    preg_match("/^https?:\/\/buff\.ly\/[a-zA-Z0-9]/", $url)
+                    preg_match("/^https?:\/\/buff\.ly\/[a-zA-Z0-9]/", $url) ||
+                    // dld.bz
+                    preg_match("/^https?:\/\/dld\.bz\/[a-zA-Z0-9]/", $url)
                 )
                 {
                     // 3回以上展開すると無限にループする可能性が高いので中断

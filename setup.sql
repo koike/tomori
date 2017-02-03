@@ -191,3 +191,11 @@ INSERT INTO WHITE_LIST VALUES
 (
     'www.yahoo.co.jp'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'yahoo.jp'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'shindanmaker.com'
+);
