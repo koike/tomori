@@ -24,7 +24,13 @@ class SampleConsumer extends OauthPhirehose
                 $url = mb_strtolower($url);
 
                 // 解析する価値がない
-                if($url == 'http://ow.ly' || $url == 'http://ow.ly/url/shorten-url')
+                if
+                (
+                    preg_match('/^https?:\/\/ow\.ly$/') ||
+                    preg_match('/^https?:\/\/ow\.ly\/$/') ||
+                    preg_match('/^https?:\/\/ow\.ly\/url\/shorten-url$/') ||
+                    preg_match('/^https?:\/\/ow\.ly\/url\/shorten-url\/$/')
+                )
                 {
                     return;
                 }
@@ -32,7 +38,6 @@ class SampleConsumer extends OauthPhirehose
                 // 展開先がループした場合のカウンタ
                 $count = 0;
 
-                // Rate Limitに掛かるのでomit
                 // 短縮URLの場合は3回まで展開する
                 while
                 (
