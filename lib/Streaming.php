@@ -23,7 +23,6 @@ class SampleConsumer extends OauthPhirehose
                 // urlを小文字に変換
                 $url = mb_strtolower($url);
 
-                echo 0;
                 // Rate Limitに掛かるのでomit
                 // 短縮URLの場合は再帰的に展開する
                 while
@@ -44,14 +43,15 @@ class SampleConsumer extends OauthPhirehose
                     preg_match("/^https?:\/\/j\.mp/", $url)
                 )
                 {
+                    echo 0;
                     $extract = Request::extract_url($url);
                     if($extract == null || $extract == $url)
                     {
                         break;
                     }
                     $url = $extract;
+                    echo 1;
                 }
-                echo 1;
 
                 $tomori = new Analyze($url);
 
