@@ -75,7 +75,7 @@ class Request
             $context = stream_context_create($opts);
             try
             {
-                $fp = fopen($url, 'r', false, $context);
+                @$fp = fopen($url, 'r', false, $context);
                 $headers = stream_get_meta_data($fp)['wrapper_data'];
             }
             catch(\Exception $e)
@@ -86,6 +86,10 @@ class Request
             $location = [];
             foreach($headers as $line)
             {
+                if(preg_grep('/^HTTP\/1\.[0-1] 4/', $line))
+                {
+                    return $url;
+                }
                 if(preg_match('/^Location:/', $line))
                 {
                     array_push($location, str_replace('Location: ', '', $line));
