@@ -64,25 +64,26 @@ class Request
         $ua = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36';
         $ref = $url;
 
-        $client = new Client(['verify' => false]);
         try
         {
-            $response = $client->request
-            (
-                'GET',
-                $url,
-                [
-                    'headers'   =>
-                    [
-                        'User-Agent'    =>  $ua,
-                        'Referer'       =>  $ref
-                    ],
-                    'timeout'   =>  5
-                ]
-            );
+            $opts['http'] =
+            [
+                'method' => 'GET',
+                'header' => 'User-Agent: ' . $ua,
+                'timeout' => 5
+            ];
+            $context = stream_context_create($opts);
+            $fp = fopen($url, 'r', false, $context);
+            $headers = stream_get_meta_data($fp)['wrapper_data'];
 
-            $headers = $response->getHeaders();
-            $location = $headers['Location'] ?? null;
+            $location = null;
+            foreach($headers as $line)
+            {
+                if(preg_match('/^Location:/', $line))
+                {
+                    $location = str_replace('Location: ', '', $line);
+                }
+            }
             if($location == null)
             {
                 return $url;
@@ -97,7 +98,7 @@ class Request
             {
                 $location = $url . $location;
             }
-
+            
             return $location;
         }
         catch(\Exception $e)
