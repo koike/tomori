@@ -60,6 +60,21 @@ class Request
         {
             return $url;
         }
+
+        // linkisは余計な部分を取り除く
+        if(preg_match('/^https?:\/\/linkis\.com\/[a-zA-Z0-9]/', $url))
+        {
+            if(substr($url, 0, 5) === 'https')
+            {
+                $url = substr($url, 19);
+            }
+            else
+            {
+                $url = substr($url, 18);
+            }
+            return $url;
+        }
+        
         $ua = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36';
         $ref = $url;
         try
