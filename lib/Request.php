@@ -70,23 +70,11 @@ class Request
             [
                 'method' => 'GET',
                 'header' => 'User-Agent: ' . $ua,
-                'timeout' => 5,
-                'ignore_errors' => true
+                'timeout' => 5
             ];
             $context = stream_context_create($opts);
-            try
-            {
-                @$fp = fopen($url, 'r', false, $context);
-                if (!$fp)
-                {
-                    throw new Exception('failed to open stream');
-                }
-                $headers = stream_get_meta_data($fp)['wrapper_data'];
-            }
-            catch(\Exception $e)
-            {
-                return $url;
-            }
+            file_get_contents($url, false, $context);
+            $headers = $http_response_header;
 
             $location = [];
             foreach($headers as $line)
