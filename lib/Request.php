@@ -68,9 +68,10 @@ class Request
         {
             $opts['http'] =
             [
-                'method' => 'GET',
-                'header' => 'User-Agent: ' . $ua,
-                'timeout' => 5
+                'method'        =>  'GET',
+                'header'        =>  'User-Agent: ' . $ua,
+                'timeout'       =>  5,
+                'ignore_errors' =>  true
             ];
             $context = stream_context_create($opts);
             file_get_contents($url, false, $context);
