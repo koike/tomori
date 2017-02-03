@@ -20,6 +20,9 @@ class SampleConsumer extends OauthPhirehose
                     break;
                 }
 
+                // urlを小文字に変換
+                $url = mb_strtolower($url);
+
                 // Rate Limitに掛かるのでomit
                 // 短縮URLの場合は再帰的に展開する
                 while
