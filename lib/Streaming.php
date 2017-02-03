@@ -43,14 +43,14 @@ class SampleConsumer extends OauthPhirehose
                     preg_match("/^https?:\/\/j\.mp/", $url)
                 )
                 {
-                    echo 0;
+                    echo 'url => ' . $url . PHP_EOL;
                     $extract = Request::extract_url($url);
                     if($extract == null || $extract == $url)
                     {
                         break;
                     }
                     $url = $extract;
-                    echo 1;
+                    echo 'extract => ' . $url . PHP_EOL;
                 }
 
                 $tomori = new Analyze($url);
@@ -98,10 +98,6 @@ class SampleConsumer extends OauthPhirehose
                     {
                         echo '[-] ' . $url . PHP_EOL;
                     }
-                }
-                else
-                {
-                    echo PHP_EOL;
                 }
             }
         }
