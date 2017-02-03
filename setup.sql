@@ -211,3 +211,11 @@ INSERT INTO WHITE_LIST VALUES
 (
     'www.tumblr.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'sp.mbga.jp'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'mbga.jp'
+);
