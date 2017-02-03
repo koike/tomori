@@ -58,64 +58,36 @@ class Request
     {
         if(!is_string($url) || strlen($url) == 0)
         {
-            return null;
+            return $url;
         }
-
         $ua = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36';
         $ref = $url;
-
         try
         {
-            $opts['http'] =
+            $curl = curl_init($url);
+            $options =
             [
-                'method'        =>  'GET',
-                'header'        =>  'User-Agent: ' . $ua,
-                'timeout'       =>  5,
-                'ignore_errors' =>  true
+                CURLOPT_USERAGENT => $ua,
+                CURLOPT_TIMEOUT => 5,
+                CURLOPT_HTTPGET => true,
+                CURLOPT_RETURNTRANSFER => true
             ];
-            $context = stream_context_create($opts);
-            @file_get_contents($url, false, $context);
-            $headers = $http_response_header;
+            curl_setopt_array($curl, $options);
+            $response = curl_exec($curl);
+            $headers = curl_getinfo($curl);
+            $extract_url = $headers['redirect_url'];
 
-            $location = [];
-            foreach($headers as $line)
+            if(!preg_match('/^https?:\/\//', $extract_url))
             {
-                if(preg_match('/^HTTP\/1\.[0-1] [4-5]/', $line))
-                {
-                    return null;
-                }
-                if(preg_match('/^Location:/', $line))
-                {
-                    array_push($location, trim(str_replace('Location: ', '', $line)));
-                }
+                $domain = parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($l, PHP_URL_HOST);
+                $extract_url = $domain . '://' . $extract_url;
             }
-            if(empty($location))
-            {
-                return $url;
-            }
-
-            $domain = [];
-            foreach($location as $l)
-            {
-                if(preg_match('/^https?:\/\//', $l))
-                {
-                    $l = parse_url($l, PHP_URL_SCHEME) . '://' . parse_url($l, PHP_URL_HOST);
-                    array_push($domain, $l);
-                }
-            }
-
-            $location = end($location);
-            if(!preg_match('/^https?:\/\//', $location))
-            {
-                $location = end($domain) . $location;
-            }
-
-            return $location;
+            
+            return $extract_url;
         }
         catch(\Exception $e)
         {
-            echo $e->getMessage();
-            return null;
+            return $url;
         }
     }
 }
