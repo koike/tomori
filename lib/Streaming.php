@@ -24,8 +24,8 @@ class SampleConsumer extends OauthPhirehose
                 // 短縮URLの場合は再帰的に展開する
                 while
                 (
-                    // // goo.gl
-                    // preg_match("/^https?:\/\/goo\.gl/", $url) ||
+                    // goo.gl
+                    preg_match("/^https?:\/\/goo\.gl/", $url) ||
                     // bit.ly
                     preg_match("/^https?:\/\/bit\.ly/", $url) ||
                     // ift.tt
@@ -35,7 +35,9 @@ class SampleConsumer extends OauthPhirehose
                     // dlvr.it
                     preg_match("/^https?:\/\/dlvr\.it/", $url) ||
                     // ow.ly
-                    preg_match("/^https?:\/\/ow\.ly/", $url)
+                    preg_match("/^https?:\/\/ow\.ly/", $url) ||
+                    // j.mp
+                    preg_match("/^https?:\/\/j\.mp/", $url)
                 )
                 {
                     $extract = Request::extract_url($url);
