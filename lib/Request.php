@@ -54,7 +54,7 @@ class Request
         }
     }
 
-    public static function extract_url(string $url) : string
+    public static function extract_url(string $url)
     {
         if(!is_string($url) || strlen($url) == 0)
         {
@@ -88,7 +88,7 @@ class Request
             {
                 if(preg_match('/^HTTP\/1\.[0-1] 4/', $line))
                 {
-                    return $url;
+                    return null;
                 }
                 if(preg_match('/^Location:/', $line))
                 {
@@ -121,7 +121,7 @@ class Request
         catch(\Exception $e)
         {
             echo $e->getMessage();
-            return $url;
+            return null;
         }
     }
 }
