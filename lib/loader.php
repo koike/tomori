@@ -14,4 +14,5 @@ require_once 'lib/Streaming.php';
 
 require_once 'lib/Campaign/PseudoDarkleech.php';
 require_once 'lib/Campaign/EITest.php';
+require_once 'lib/Campaign/EITest2.php';
 require_once 'lib/Campaign/Afraidgate.php';
