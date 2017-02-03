@@ -76,29 +76,35 @@ class Request
             $fp = fopen($url, 'r', false, $context);
             $headers = stream_get_meta_data($fp)['wrapper_data'];
 
-            $location = null;
+            $location = [];
             foreach($headers as $line)
             {
                 if(preg_match('/^Location:/', $line))
                 {
-                    $location = str_replace('Location: ', '', $line);
+                    array_push($location, str_replace('Location: ', '', $line));
                 }
             }
-            if($location == null)
+            if(empty($location))
             {
                 return $url;
             }
 
-            if(is_array($location))
+            $domain = [];
+            foreach($location as $l)
             {
-                $location = end($location);
+                if(preg_match('/^https?:\/\//', $l))
+                {
+                    $l = parse_url($l, PHP_URL_SCHEME) . '://' . parse_url($l, PHP_URL_HOST);
+                    array_push($domain, $l);
+                }
             }
 
+            $location = end($location);
             if(!preg_match('/^https?:\/\//', $location))
             {
-                $location = $url . $location;
+                $location = end($domain) . $location;
             }
-            
+
             return $location;
         }
         catch(\Exception $e)
