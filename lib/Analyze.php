@@ -37,7 +37,7 @@ class Analyze
             {
                 $this->description = 'EITest';
             }
-            $ei2 = EITest::analyze($html);
+            $ei2 = EITest2::analyze($html);
             if($ei2)
             {
                 $this->description = 'EITest';
