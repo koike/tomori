@@ -51,9 +51,9 @@ class SampleConsumer extends OauthPhirehose
                     // is.gd
                     preg_match("/^https?:\/\/is\.gd\/[a-zA-Z0-9]/", $url) ||
                     // tinyurl.com
-                    preg_match("/^https?:\/\/tinyurl\.com\/[a-zA-Z0-9]/", $url) ||
-                    // linkis.com
-                    preg_match("/^https?:\/\/linkis\.com\/[a-zA-Z0-9]/", $url)
+                    preg_match("/^https?:\/\/tinyurl\.com\/[a-zA-Z0-9]/", $url)
+                    // // linkis.com
+                    // preg_match("/^https?:\/\/linkis\.com\/[a-zA-Z0-9]/", $url)
                 )
                 {
                     // ループしていたら中断
