@@ -61,6 +61,16 @@ class Analyze
     
     public function register_db($tweet = null)
     {
+        DB::table('RESULT')
+        ->insert
+        (
+            [
+                'url'           =>  $this->url,
+                'description'   =>  $this->description,
+                'created_at'    =>  date('Y-m-d H:i:s')
+            ]
+        );
+        
         // データをgistにPOSTする
         $files =
         [
@@ -88,16 +98,6 @@ class Analyze
             [
                 'url'           =>  $this->url,
                 'gist'          =>  $this->gist_url,
-                'created_at'    =>  date('Y-m-d H:i:s')
-            ]
-        );
-        
-        DB::table('RESULT')
-        ->insert
-        (
-            [
-                'url'           =>  $this->url,
-                'description'   =>  $this->description,
                 'created_at'    =>  date('Y-m-d H:i:s')
             ]
         );
