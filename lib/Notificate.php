@@ -94,14 +94,14 @@ class Notificate
 
     public static function shutdown()
     {
+        $trace = debug_backtrace();
+        $trace = json_encode($trace);
+
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {
             $channel = urlencode('#alert');
-            $text = urlencode
-            (
-                "[Alert]\nSystem abnormally terminated!\nRebooting System..."
-            );
+            $text = urlencode("```\n" . $trace . "\n```");
 
             $url = 'https://slack.com/api/chat.postMessage?token=' .
                     $token .
@@ -113,7 +113,7 @@ class Notificate
         }
 
         // 無限に再起動するのを防ぐために一旦スリープする
-        sleep(10 * 60);
+        sleep(5 * 60);
         exec('nohup php tomori.php > /dev/null 2>&1 &', $arr, $res);
     }
 }
