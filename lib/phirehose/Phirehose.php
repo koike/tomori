@@ -690,7 +690,7 @@ abstract class Phirehose
       $s.= "\r\n";
       
       fwrite($this->conn, $s);
-      $this->log($s);
+      // $this->log($s);
       
       // First line is response
       list($httpVer, $httpCode, $httpMessage) = preg_split('/\s+/', trim(fgets($this->conn, 1024)), 3);
