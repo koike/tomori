@@ -101,7 +101,7 @@ class Notificate
         if($token != null && $token != '')
         {
             $channel = urlencode('#alert');
-            $text = urlencode("```\n" . $trace . "\n```");
+            $text = urlencode("System terminated! Rebooting...\n```\n" . $trace . "\n```");
 
             $url = 'https://slack.com/api/chat.postMessage?token=' .
                     $token .
