@@ -88,7 +88,11 @@ class Analyze
         var_dump($files);
         $files_dump = ob_get_contents();
         ob_end_clean();
-        file_put_contents($files_dump, 'dump.log');
+        if(!file_exists('log'))
+        {
+            mkdir('log');
+        }
+        file_put_contents('log/' . date('Y_m_d_H_i_s') . '.txt', $files_dump);
 
         $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
         
