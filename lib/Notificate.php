@@ -1,5 +1,7 @@
 <?php
 
+require_once 'vendor/autoload.php';
+
 class Notificate
 {
     public static function slack(Analyze $tomori)
