@@ -19,7 +19,10 @@ function exception_handler($e)
 function shutdown_handler()
 {
     $trace = debug_backtrace();
-    $trace = json_encode($trace);
+    ob_start();
+    var_dump($trace);
+    $trace = ob_get_contents();
+    ob_end_clean();
     Notificate::shutdown($trace);
 }
 
