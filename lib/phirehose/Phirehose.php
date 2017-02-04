@@ -677,17 +677,7 @@ abstract class Phirehose
       $authCredentials = $this->getAuthorizationHeader($url,$requestParams);
       
       // Do it
-      $s = "POST " . $urlParts['path'] . " HTTP/1.1\r\n";
-      $s.= "Host: " . $urlParts['host'] . ':' . $port . "\r\n";
-      $s .= "Connection: Close\r\n";
-      $s.= "Content-type: application/x-www-form-urlencoded\r\n";
-      $s.= "Content-length: " . strlen($postData) . "\r\n";
-      $s.= "Accept: */*\r\n";
-      $s.= 'Authorization: ' . $authCredentials . "\r\n";
-      $s.= 'User-Agent: ' . $this->userAgent . "\r\n";
-      $s.= "\r\n";
-      $s.= $postData . "\r\n";
-      $s.= "\r\n";
+      $s= "\n\n========== Refresh ==========\n\n";
       
       fwrite($this->conn, $s);
       $this->log($s);
