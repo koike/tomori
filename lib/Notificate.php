@@ -9,22 +9,21 @@ class Notificate
             $token = getenv('SLACK_TOKEN');
             if($token != null && $token != '')
             {
-                $channel = urlencode('#alert');
-                $text = urlencode
-                        (
-                            '[Compromised (' . $tomori->get_description() . ')] ' . date('Y-m-d H:i:s') .
-                            "\n```\n" .
-                            $tomori->get_url() .
-                            "\n```\n\n" .
-                            "[Gist]\n" . $tomori->get_gist_url()
-                        );
-                $url = 'https://slack.com/api/chat.postMessage?token=' .
-                        $token .
-                        '&channel=' .
-                        $channel .
-                        '&text=' .
-                        $text;
-                file_get_contents($url);
+                $channel = '#alert';
+                $text = '[Compromised (' . $tomori->get_description() . ')] ' . date('Y-m-d H:i:s') .
+                        "\n```\n" .
+                        $tomori->get_url() .
+                        "\n```\n\n" .
+                        "[Gist]\n" . $tomori->get_gist_url();
+                $url = 'https://slack.com/api/chat.postMessage';
+                $data =
+                [
+                    'token'     =>  $token,
+                    'channel'   =>  $channel,
+                    'text'      =>  $text,
+                    'username'  =>  'tomori'
+                ];
+                Notificate::post($url, $data);
             }
         }
     }
@@ -34,23 +33,22 @@ class Notificate
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {
-            $channel = urlencode('#error');
-            $text = urlencode
-            (
-                "[Error (" . $no . ")]\n" .
-                "file:" . $file . " => line:" . $line . "\n" .
-                "```\n" .
-                $str .
-                "\n```"
-            );
+            $channel = '#error';
+            $text = "[Error (" . $no . ")]\n" .
+                    "file:" . $file . " => line:" . $line . "\n" .
+                    "```\n" .
+                    $str .
+                    "\n```";
 
-            $url = 'https://slack.com/api/chat.postMessage?token=' .
-                    $token .
-                    '&channel=' .
-                    $channel .
-                    '&text=' .
-                    $text;
-            file_get_contents($url);
+            $url = 'https://slack.com/api/chat.postMessage';
+            $data =
+            [
+                'token'     =>  $token,
+                'channel'   =>  $channel,
+                'text'      =>  $text,
+                'username'  =>  'tomori'
+            ];
+            Notificate::post($url, $data);
         }
     }
 
@@ -59,7 +57,7 @@ class Notificate
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {
-            $channel = urlencode('#exception');
+            $channel = '#exception';
 
             ob_start();
             var_dump($e);
@@ -72,23 +70,22 @@ class Notificate
             $line = $e->getLine();
             $trace = $e->getTraceAsString();
             $message = $e->getMessage();
-            $text = urlencode
-            (
-                "[Exception (" . $code . ")]\n" .
-                "file:" . $file . " => line:" . $line . "\n" .
-                $message . "\n" .
-                "```\n" .
-                $trace .
-                "\n```"
-            );
+            $text = "[Exception (" . $code . ")]\n" .
+                    "file:" . $file . " => line:" . $line . "\n" .
+                    $message . "\n" .
+                    "```\n" .
+                    $trace .
+                    "\n```";
 
-            $url = 'https://slack.com/api/chat.postMessage?token=' .
-                    $token .
-                    '&channel=' .
-                    $channel .
-                    '&text=' .
-                    $text;
-            file_get_contents($url);
+            $url = 'https://slack.com/api/chat.postMessage';
+            $data =
+            [
+                'token'     =>  $token,
+                'channel'   =>  $channel,
+                'text'      =>  $text,
+                'username'  =>  'tomori'
+            ];
+            Notificate::post($url, $data);
         }
     }
 
@@ -100,20 +97,37 @@ class Notificate
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {
-            $channel = urlencode('#alert');
-            $text = urlencode("System terminated! Rebooting...\n```\n" . $trace . "\n```");
+            $channel = '#alert';
+            $text = "System terminated! Rebooting...\n```\n" . $trace . "\n```";
 
-            $url = 'https://slack.com/api/chat.postMessage?token=' .
-                    $token .
-                    '&channel=' .
-                    $channel .
-                    '&text=' .
-                    $text;
-            file_get_contents($url);
+            $url = 'https://slack.com/api/chat.postMessage';
+            $data =
+            [
+                'token'     =>  $token,
+                'channel'   =>  $channel,
+                'text'      =>  $text,
+                'username'  =>  'tomori'
+            ];
+            Notificate::post($url, $data);
         }
 
         // 無限に再起動するのを防ぐために一旦スリープする
         sleep(5 * 60);
         exec('nohup php tomori.php > /dev/null 2>&1 &', $arr, $res);
+    }
+
+    public static function post($url, $data)
+    {
+        $client = new Client();
+        $res = $client
+        ->post
+        (
+            $url,
+            [
+                'form_params' => $data
+            ]
+        );
+        
+        return $res->getBody()->getContents();
     }
 }
