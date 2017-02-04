@@ -91,11 +91,8 @@ class Notificate
         }
     }
 
-    public static function shutdown()
+    public static function shutdown(string $trace)
     {
-        $trace = debug_backtrace();
-        $trace = json_encode($trace);
-
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {

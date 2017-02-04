@@ -18,7 +18,9 @@ function exception_handler($e)
 
 function shutdown_handler()
 {
-    Notificate::shutdown();
+    $trace = debug_backtrace();
+    $trace = json_encode($trace);
+    Notificate::shutdown($trace);
 }
 
 set_error_handler('error_handler');
