@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\Client;
+
 class Notificate
 {
     public static function slack(Analyze $tomori)
