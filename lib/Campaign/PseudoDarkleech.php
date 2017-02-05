@@ -18,6 +18,28 @@ class PseudoDarkleech
             $rate += 1;
         }
 
+        // biw, ct, br_fl, tuif, oq
+        if(strpos($html, 'biw=') !== false)
+        {
+            $rate += 0.2;
+        }
+        if(strpos($html, 'ct=') !== false)
+        {
+            $rate += 0.2;
+        }
+        if(strpos($html, 'br_fl=') !== false)
+        {
+            $rate += 0.2;
+        }
+        if(strpos($html, 'tuif=') !== false)
+        {
+            $rate += 0.2;
+        }
+        if(strpos($html, 'oq=') !== false)
+        {
+            $rate += 0.2;
+        }
+
         if($rate >= 1)
         {
             return true;
