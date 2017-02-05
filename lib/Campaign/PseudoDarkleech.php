@@ -13,7 +13,7 @@ class PseudoDarkleech
         }
         
         // iframeのsrcが小文字.大文字.大文字からなるドメイン
-        if(preg_match('/iframe src="http:\/\/([a-z0-9]+)\.([a-zA-Z0-9\-_]+)\.([A-Z0-9\-_]+)/', $html))
+        if(preg_match('/iframe src="https?:\/\/([a-z0-9]+)\.([a-zA-Z0-9\-_]+)\.([A-Z0-9\-_]+)/', $html))
         {
             $rate += 1;
         }

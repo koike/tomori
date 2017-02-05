@@ -42,8 +42,8 @@ class EITest
             $rate += 0.2;
         }
 
-        // "http://小文字.大文字.大文字
-        if(preg_match('/http:\/\/([a-z0-9]+)\.([A-Z0-9\-_]+)\.([A-Z0-9\-_]+)/', $html))
+        // http://小文字.大文字.大文字
+        if(preg_match('/https?:\/\/([a-z0-9]+)\.([A-Z0-9\-_]+)\.([A-Z0-9\-_]+)/', $html))
         {
             $rate += 0.5;
         }
