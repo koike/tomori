@@ -267,3 +267,7 @@ INSERT INTO WHITE_LIST VALUES
 (
     'ustre.am'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'web.live.bigo.sg'
+);
