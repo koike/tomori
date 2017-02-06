@@ -271,3 +271,11 @@ INSERT INTO WHITE_LIST VALUES
 (
     'web.live.bigo.sg'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'vimeo.com'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'rover.ebay.com'
+);
