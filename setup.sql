@@ -219,3 +219,23 @@ INSERT INTO WHITE_LIST VALUES
 (
     'mbga.jp'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'r10.to'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'a.r10.to'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'twitch.tv'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'tv.naver.com'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'twpf.jp'
+);
