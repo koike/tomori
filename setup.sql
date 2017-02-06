@@ -335,3 +335,11 @@ INSERT INTO WHITE_LIST VALUES
 (
     'soundcloud.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'htn.to'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'b.hatena.ne.jp'
+);
