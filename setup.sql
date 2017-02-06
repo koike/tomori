@@ -287,3 +287,7 @@ INSERT INTO WHITE_LIST VALUES
 (
     'blog.naver.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'm.blog.naver.com'
+);
