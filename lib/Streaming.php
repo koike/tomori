@@ -57,7 +57,9 @@ class SampleConsumer extends OauthPhirehose
                     // bit.do
                     preg_match("/^https?:\/\/bit\.do\/[a-zA-Z0-9]/", $url) ||
                     // lnkd.in
-                    preg_match("/^https?:\/\/lnkd\.in\/[a-zA-Z0-9]/", $url)
+                    preg_match("/^https?:\/\/lnkd\.in\/[a-zA-Z0-9]/", $url) ||
+                    // hill.cm
+                    preg_match("/^https?:\/\/hill\.cm\/[a-zA-Z0-9]/", $url)
                 )
                 {
                     // ループしていたら中断
