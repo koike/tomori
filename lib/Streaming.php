@@ -87,6 +87,11 @@ class SampleConsumer extends OauthPhirehose
                     $url = $extract;
                 }
 
+                if(preg_match('/^https?:\/\/d3waapp\.org\/[a-zA-Z0-9]/', $url))
+                {
+                    exit(0);
+                }
+
                 $tomori = new Analyze($url);
 
                 // 解析する意味のあるURLか
