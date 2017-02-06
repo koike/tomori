@@ -295,3 +295,7 @@ INSERT INTO WHITE_LIST VALUES
 (
     'line.me'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'cards.twitter.com'
+);

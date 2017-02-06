@@ -64,8 +64,6 @@ class SampleConsumer extends OauthPhirehose
                     preg_match("/^https?:\/\/ara\.tv\/[a-zA-Z0-9]/", $url) ||
                     // tsl.cm
                     preg_match("/^https?:\/\/tsl\.cm\/[a-zA-Z0-9]/", $url) ||
-                    // 2bit.tk
-                    preg_match("/^https?:\/\/2bit\.tk\/[a-zA-Z0-9]/", $url) ||
                     // ebay.to
                     preg_match("/^https?:\/\/ebay\.to\/[a-zA-Z0-9]/", $url) ||
                     // shar.es
@@ -85,11 +83,6 @@ class SampleConsumer extends OauthPhirehose
                         break;
                     }
                     $url = $extract;
-                }
-
-                if(preg_match('/^https?:\/\/d3waapp\.org\/[a-zA-Z0-9]/', $url))
-                {
-                    exit(0);
                 }
 
                 $tomori = new Analyze($url);
