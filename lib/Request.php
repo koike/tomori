@@ -72,6 +72,12 @@ class Request
             {
                 $extract_url = 'http://' . substr($url, 18);
             }
+            $host = parse_url($extract_url, PHP_URL_HOST);
+            if(strpos($host, '.') === false)
+            {
+                return $url;
+            }
+
             return $extract_url;
         }
         
@@ -97,7 +103,12 @@ class Request
                 $domain = parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
                 $extract_url = $domain . $extract_url;
             }
-            
+
+            $host = parse_url($extract_url, PHP_URL_HOST);
+            if(strpos($host, '.') === false)
+            {
+                return $url;
+            }
             return $extract_url;
         }
         catch(\Exception $e)
