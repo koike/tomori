@@ -255,3 +255,7 @@ INSERT INTO WHITE_LIST VALUES
 (
     'twpf.jp'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'matome.naver.jp'
+);
