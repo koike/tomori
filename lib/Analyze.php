@@ -140,10 +140,14 @@ class Analyze
         // white listに含まれている場合は解析する必要なし
         foreach($white_list as $domain)
         {
-            if(preg_match('/https?:\/\/' . str_replace('.', '\.', $domain['domain']) . '\//', $url))
+            if(parse_url($url, PHP_URL_HOST) === $domain['domain'])
             {
                 return false;
             }
+            // if(preg_match('/https?:\/\/' . str_replace('.', '\.', $domain['domain']) . '\//', $url))
+            // {
+            //     return false;
+            // }
         }
 
         // 拡張子が明らかにhtmlではないものは弾く
