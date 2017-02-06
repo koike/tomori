@@ -259,3 +259,11 @@ INSERT INTO WHITE_LIST VALUES
 (
     'matome.naver.jp'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'radiko.jp'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'ustre.am'
+);
