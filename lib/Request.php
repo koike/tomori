@@ -92,6 +92,11 @@ class Request
             $headers = curl_getinfo($curl);
             $extract_url = $headers['redirect_url'];
 
+            if($extract_url === '')
+            {
+                return $url;
+            }
+
             if(!preg_match('/^https?:\/\//', $extract_url))
             {
                 $domain = parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
