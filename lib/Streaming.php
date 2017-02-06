@@ -71,7 +71,9 @@ class SampleConsumer extends OauthPhirehose
                     // wp.me
                     preg_match("/^https?:\/\/wp\.me\/[a-zA-Z0-9]/", $url) ||
                     // url9.co
-                    preg_match("/^https?:\/\/url9\.co\/[a-zA-Z0-9]/", $url)
+                    preg_match("/^https?:\/\/url9\.co\/[a-zA-Z0-9]/", $url) ||
+                    // tt0.co
+                    preg_match("/^https?:\/\/tt0\.co\/[a-zA-Z0-9]/", $url)
                 )
                 {
                     // ループしていたら中断

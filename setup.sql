@@ -311,3 +311,7 @@ INSERT INTO WHITE_LIST VALUES
 (
     'www.tenki.jp'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'blog.livedoor.jp'
+);
