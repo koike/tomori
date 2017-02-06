@@ -91,10 +91,6 @@ class Request
             $response = curl_exec($curl);
             $headers = curl_getinfo($curl);
             $extract_url = $headers['redirect_url'];
-            if($extract_url == '')
-            {
-                return $url;
-            }
 
             if(!preg_match('/^https?:\/\//', $extract_url))
             {
