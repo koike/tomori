@@ -66,8 +66,8 @@ class SampleConsumer extends OauthPhirehose
                     preg_match("/^https?:\/\/tsl\.cm\/[a-zA-Z0-9]/", $url) ||
                     // ebay.to
                     preg_match("/^https?:\/\/ebay\.to\/[a-zA-Z0-9]/", $url) ||
-                    // shar.es
-                    preg_match("/^https?:\/\/shar\.es\/[a-zA-Z0-9]/", $url) ||
+                    // // shar.es
+                    // preg_match("/^https?:\/\/shar\.es\/[a-zA-Z0-9]/", $url) ||
                     // wp.me
                     preg_match("/^https?:\/\/wp\.me\/[a-zA-Z0-9]/", $url) ||
                     // url9.co
