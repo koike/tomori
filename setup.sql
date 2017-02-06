@@ -299,3 +299,11 @@ INSERT INTO WHITE_LIST VALUES
 (
     'cards.twitter.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'www.nicovideo.jp'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'www.tenki.jp'
+);
