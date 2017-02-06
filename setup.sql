@@ -327,3 +327,11 @@ INSERT INTO WHITE_LIST VALUES
 (
     'news.livedoor.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'flic.kr'
+);
+INSERT INTO WHITE_LIST VALUES
+(
+    'soundcloud.com'
+);
