@@ -67,7 +67,9 @@ class SampleConsumer extends OauthPhirehose
                     // 2bit.tk
                     preg_match("/^https?:\/\/2bit\.tk\/[a-zA-Z0-9]/", $url) ||
                     // ebay.to
-                    preg_match("/^https?:\/\/ebay\.to\/[a-zA-Z0-9]/", $url)
+                    preg_match("/^https?:\/\/ebay\.to\/[a-zA-Z0-9]/", $url) ||
+                    // shar.es
+                    preg_match("/^https?:\/\/shar\.es\/[a-zA-Z0-9]/", $url)
                 )
                 {
                     // ループしていたら中断
