@@ -63,7 +63,9 @@ class SampleConsumer extends OauthPhirehose
                     // hill.cm
                     preg_match("/^https?:\/\/hill\.cm\/[a-zA-Z0-9]/", $url) ||
                     // ara.tv
-                    preg_match("/^https?:\/\/ara\.tv\/[a-zA-Z0-9]/", $url)
+                    preg_match("/^https?:\/\/ara\.tv\/[a-zA-Z0-9]/", $url) ||
+                    // tsl.cm
+                    preg_match("/^https?:\/\/tsl\.cm\/[a-zA-Z0-9]/", $url)
                 )
                 {
                     // ループしていたら中断
