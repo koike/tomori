@@ -18,12 +18,7 @@ function exception_handler($e)
 
 function shutdown_handler()
 {
-    $trace = debug_backtrace();
-    ob_start();
-    var_dump($trace);
-    $trace = ob_get_contents();
-    ob_end_clean();
-    Notificate::shutdown($trace);
+    Notificate::shutdown();
 }
 
 set_error_handler('error_handler');

@@ -91,13 +91,13 @@ class Notificate
         }
     }
 
-    public static function shutdown(string $trace)
+    public static function shutdown()
     {
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {
             $channel = '#alert';
-            $text = "System terminated! Rebooting...\n```\n" . $trace . "\n```";
+            $text = "System terminated! Rebooting...";
 
             $url = 'https://slack.com/api/chat.postMessage';
             $data =
