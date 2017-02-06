@@ -66,8 +66,6 @@ class Request
         // linkisは余計な部分を取り除く
         if(preg_match('/^https?:\/\/linkis\.com\/[a-zA-Z0-9]/', $url))
         {
-            exit(0);
-            
             if(substr($url, 0, 5) === 'https')
             {
                 $extract_url = 'https://' . substr($url, 19);
