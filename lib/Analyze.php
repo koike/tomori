@@ -70,6 +70,19 @@ class Analyze
                 'created_at'    =>  date('Y-m-d H:i:s')
             ]
         );
+
+        // ドメインに紐付いてるIPの情報を得る
+        $subdomain = parse_url($this->url, PHP_URL_HOST);
+        $ip_addr['subdomain'] = gethostbynamel($subdomain);
+
+        // サブドメインの場合はメインドメインの情報も得る
+        $element = explode('.', $subdomain);
+        if(count($element) >= 3)
+        {
+            $tld = end($element);
+            $domain = $element[count($element)-2] . '.' . $tld;
+            $ip_addr['domain'] = gethostbynamel($domain);
+        }
         
         // データをgistにPOSTする
         $files =
@@ -81,6 +94,10 @@ class Analyze
             'tweet.json' =>
             [
                 'content'   =>  json_encode($tweet) . ''
+            ],
+            'ip.json' =>
+            [
+                'content'   =>  json_encode($ip_addr) . ''
             ]
         ];
 
