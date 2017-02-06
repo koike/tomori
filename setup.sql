@@ -279,3 +279,7 @@ INSERT INTO WHITE_LIST VALUES
 (
     'rover.ebay.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'blog.naver.com'
+);
