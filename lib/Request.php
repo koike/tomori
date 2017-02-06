@@ -56,8 +56,8 @@ class Request
 
     public static function extract_url(string $url) : string
     {
-        echo '[*]';
-        
+        echo '[*] ' . $url . PHP_EOL;
+
         if(!is_string($url) || strlen($url) == 0)
         {
             return $url;
