@@ -323,3 +323,7 @@ INSERT INTO WHITE_LIST VALUES
 (
     'github.com'
 );
+INSERT INTO WHITE_LIST VALUES
+(
+    'news.livedoor.com'
+);
