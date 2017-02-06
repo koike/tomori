@@ -32,6 +32,8 @@ class SampleConsumer extends OauthPhirehose
                     preg_match("/^https?:\/\/goo\.gl\/[a-zA-Z0-9]/", $url) ||
                     // bit.ly
                     preg_match("/^https?:\/\/bit\.ly\/[a-zA-Z0-9]/", $url) ||
+                    // bitly.com
+                    preg_match("/^https?:\/\/bitly\.com\/[a-zA-Z0-9]/", $url) ||
                     // ift.tt
                     preg_match("/^https?:\/\/ift\.tt\/[a-zA-Z0-9]/", $url) ||
                     // ln.is
