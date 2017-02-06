@@ -58,14 +58,14 @@ class SampleConsumer extends OauthPhirehose
                     preg_match("/^https?:\/\/linkis\.com\/[a-zA-Z0-9]/", $url) ||
                     // bit.do
                     preg_match("/^https?:\/\/bit\.do\/[a-zA-Z0-9]/", $url) ||
-                    // lnkd.in
-                    preg_match("/^https?:\/\/lnkd\.in\/[a-zA-Z0-9]/", $url) ||
                     // hill.cm
                     preg_match("/^https?:\/\/hill\.cm\/[a-zA-Z0-9]/", $url) ||
                     // ara.tv
                     preg_match("/^https?:\/\/ara\.tv\/[a-zA-Z0-9]/", $url) ||
                     // tsl.cm
-                    preg_match("/^https?:\/\/tsl\.cm\/[a-zA-Z0-9]/", $url)
+                    preg_match("/^https?:\/\/tsl\.cm\/[a-zA-Z0-9]/", $url) ||
+                    // 2bit.tk
+                    preg_match("/^https?:\/\/2bit\.tk\/[a-zA-Z0-9]/", $url)
                 )
                 {
                     // ループしていたら中断
