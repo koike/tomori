@@ -94,22 +94,26 @@ class Notificate
         }
         else
         {
-            $channel = '#error';
-            $text = "[Error (" . $e . ")]\n" .
-                    "file:" . $file . " => line:" . $line . "\n" .
-                    "```\n" .
-                    $str .
-                    "\n```";
+            $token = getenv('SLACK_TOKEN');
+            if($token != null && $token != '')
+            {
+                $channel = '#error';
+                $text = "[Error (" . $e . ")]\n" .
+                        "file:" . $file . " => line:" . $line . "\n" .
+                        "```\n" .
+                        $str .
+                        "\n```";
 
-            $url = 'https://slack.com/api/chat.postMessage';
-            $data =
-            [
-                'token'     =>  $token,
-                'channel'   =>  $channel,
-                'text'      =>  $text,
-                'username'  =>  'tomori'
-            ];
-            Notificate::post($url, $data);
+                $url = 'https://slack.com/api/chat.postMessage';
+                $data =
+                [
+                    'token'     =>  $token,
+                    'channel'   =>  $channel,
+                    'text'      =>  $text,
+                    'username'  =>  'tomori'
+                ];
+                Notificate::post($url, $data);
+            }
         }
     }
 
