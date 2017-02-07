@@ -62,15 +62,22 @@ class Request
             return $url;
         }
 
-        $client = new GuzzleClient($url);
-        $history = new HistoryPlugin();
-        $client->addSubscriber($history);
-        $response = $client->head($url)->send();
-        if (!$response->isSuccessful())
+        try
+        {
+            $client = new GuzzleClient($url);
+            $history = new HistoryPlugin();
+            $client->addSubscriber($history);
+            $response = $client->head($url)->send();
+            if (!$response->isSuccessful())
+            {
+                return $url;
+            }
+            
+            return $response->getEffectiveUrl();
+        }
+        catch(\Exception $e)
         {
             return $url;
         }
-        
-        return $response->getEffectiveUrl();
     }
 }
