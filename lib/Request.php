@@ -66,9 +66,23 @@ class Request
         try
         {
             $client = new GuzzleClient($url);
+            $ua = 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648)';
+            $ref = $url;
+            $client->setUserAgent($ua);
             $history = new HistoryPlugin();
             $client->addSubscriber($history);
-            $response = $client->head($url)->send();
+            $response =
+            $client->head
+            (
+                $url,
+                [],
+                [
+                    'timeout' => 5,
+                    'connect_timeout' => 1,
+                    'verify' => false
+                ]
+            )
+            ->send();
             if (!$response->isSuccessful())
             {
                 return $url;
