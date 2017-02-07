@@ -63,32 +63,55 @@ class Request
             return $url;
         }
 
-        try
+        // linkisは余計な部分を取り除く
+        if(preg_match('/^https?:\/\/linkis\.com\/[a-zA-Z0-9]/', $url))
         {
-            $client = new GuzzleClient($url);
-            $ua = 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648)';
-            $ref = $url;
-            $client->setUserAgent($ua);
-            $history = new HistoryPlugin();
-            $client->addSubscriber($history);
-            $response =
-            $client->head
-            (
-                $url,
-                [],
-                [
-                    'timeout' => 5,
-                    'connect_timeout' => 1,
-                    'verify' => false
-                ]
-            )
-            ->send();
-            if (!$response->isSuccessful())
+            if(substr($url, 0, 5) === 'https')
+            {
+                $extract_url = 'https://' . substr($url, 19);
+            }
+            else
+            {
+                $extract_url = 'http://' . substr($url, 18);
+            }
+            $host = parse_url($extract_url, PHP_URL_HOST);
+            if(strpos($host, '.') === false)
             {
                 return $url;
             }
-            
-            return $response->getEffectiveUrl();
+
+            return $extract_url;
+        }
+        
+        $ua = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36';
+        $ref = $url;
+        try
+        {
+            $curl = curl_init($url);
+            $options =
+            [
+                CURLOPT_USERAGENT => $ua,
+                CURLOPT_TIMEOUT => 5,
+                CURLOPT_HTTPGET => true,
+                CURLOPT_RETURNTRANSFER => true
+            ];
+            curl_setopt_array($curl, $options);
+            $response = curl_exec($curl);
+            $headers = curl_getinfo($curl);
+            $extract_url = $headers['redirect_url'];
+
+            if(!preg_match('/^https?:\/\//', $extract_url))
+            {
+                $domain = parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
+                $extract_url = $domain . $extract_url;
+            }
+
+            $host = parse_url($extract_url, PHP_URL_HOST);
+            if(strpos($host, '.') === false)
+            {
+                return $url;
+            }
+            return $extract_url;
         }
         catch(\Exception $e)
         {
