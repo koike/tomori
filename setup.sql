@@ -20,7 +20,12 @@ CREATE TABLE GIST
 CREATE TABLE URL
 (
     url TEXT,
-    html TEXT,
+    created_at DATETIME
+);
+
+CREATE TABLE AFRAID
+(
+    domain TEXT,
     created_at DATETIME
 );
 
