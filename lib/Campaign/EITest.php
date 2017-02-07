@@ -18,34 +18,32 @@ class EITest
             $rate += 1;
         }
 
-        // style.border = "0px"
-        if(preg_match('/style\.border = "0px"/', $html))
-        {
-            $rate += 0.2;
-        }
-
-        // frameBorder = "0"
-        if(preg_match('/frameBorder = "0"/', $html))
-        {
-            $rate += 0.2;
-        }
-
-        // setAttribute("frameBorder", "0")
-        // if(preg_grep('/setAttribute\("frameBorder", "0"\)/', $html))
-        // {
-        //     $rate += 0.2;
-        // }
-
-        // document.body.appendChild
-        if(preg_match('/document\.body\.appendChild/', $html))
-        {
-            $rate += 0.2;
-        }
-
         // http://小文字.大文字.大文字
         if(preg_match('/https?:\/\/([a-z0-9\-_]+)\.([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9]+)/', $html))
         {
-            $rate += 0.5;
+            $rate += 1;
+        }
+
+        // biw, ct, br_fl, tuif, oq
+        if(strpos($html, 'biw=') !== false)
+        {
+            $rate += 0.2;
+        }
+        if(strpos($html, 'ct=') !== false)
+        {
+            $rate += 0.2;
+        }
+        if(strpos($html, 'br_fl=') !== false)
+        {
+            $rate += 0.2;
+        }
+        if(strpos($html, 'tuif=') !== false)
+        {
+            $rate += 0.2;
+        }
+        if(strpos($html, 'oq=') !== false)
+        {
+            $rate += 0.2;
         }
 
         if($rate >= 2)

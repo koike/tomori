@@ -6,20 +6,20 @@ class EITest2
     {
         $rate = 0;
 
-        // if (!!window.chrome && !!window.chrome.webstore)
-        if(preg_match('/if \(!!window\.chrome && !!window\.chrome\.webstore\)/', $html))
-        {
-            $rate += 1;
-        }
-
-        // <input type='hidden'
-        if(preg_match('/<input type=\'hidden\'/', $html))
+        // <script>if (!!window.chrome && !!window.chrome.webstore)
+        if(preg_match('/<script>if \(!!window\.chrome && !!window\.chrome\.webstore\)/', $html))
         {
             $rate += 1;
         }
 
         // <div id="popup-container" class="popuo-window gc" style="display:none;">
         if(preg_match('/<div id="popup-container" class="popuo-window gc" style="display:none;">/', $html))
+        {
+            $rate += 1;
+        }
+
+        // document.getElementById('popup-container')
+        if(preg_match('/document\.getElementById\(\'popup-container\'\)/', $html))
         {
             $rate += 1;
         }

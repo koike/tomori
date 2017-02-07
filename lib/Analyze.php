@@ -30,7 +30,7 @@ class Analyze
             $pd = PseudoDarkleech::analyze($html);
             if($pd)
             {
-                $this->description = 'PseudoDarkleech';
+                $this->description = 'pseudoDarkleech';
             }
             $ei = EITest::analyze($html);
             if($ei)
@@ -42,7 +42,7 @@ class Analyze
             {
                 $this->description = 'EITest';
             }
-            $af = Afraidgate::analyze($html);
+            $af = Afraidgate::analyze($html, $this->url);
             if($af)
             {
                 $this->description = 'Afraidgate';
