@@ -26,70 +26,70 @@ class SampleConsumer extends OauthPhirehose
                 // 無限に展開しないように
                 $history = [];
                 // 短縮URLの場合は再帰的に展開する
-                while
-                (
-                    // goo.gl
-                    preg_match("/^https?:\/\/goo\.gl\/[a-zA-Z0-9]/", $url) ||
-                    // bit.ly
-                    preg_match("/^https?:\/\/bit\.ly\/[a-zA-Z0-9]/", $url) ||
-                    // bitly.com
-                    preg_match("/^https?:\/\/bitly\.com\/[a-zA-Z0-9]/", $url) ||
-                    // ift.tt
-                    preg_match("/^https?:\/\/ift\.tt\/[a-zA-Z0-9]/", $url) ||
-                    // ln.is
-                    preg_match("/^https?:\/\/ln\.is\/[a-zA-Z0-9]/", $url) ||
-                    // dlvr.it
-                    preg_match("/^https?:\/\/dlvr\.it\/[a-zA-Z0-9]/", $url) ||
-                    // ow.ly
-                    preg_match("/^https?:\/\/ow\.ly\/[a-zA-Z0-9]/", $url) ||
-                    // j.mp
-                    preg_match("/^https?:\/\/j\.mp\/[a-zA-Z0-9]/", $url) ||
-                    // buff.ly
-                    preg_match("/^https?:\/\/buff\.ly\/[a-zA-Z0-9]/", $url) ||
-                    // dld.bz
-                    preg_match("/^https?:\/\/dld\.bz\/[a-zA-Z0-9]/", $url) ||
-                    // trib.al
-                    preg_match("/^https?:\/\/trib\.al\/[a-zA-Z0-9]/", $url) ||
-                    // is.gd
-                    preg_match("/^https?:\/\/is\.gd\/[a-zA-Z0-9]/", $url) ||
-                    // tinyurl.com
-                    preg_match("/^https?:\/\/tinyurl\.com\/[a-zA-Z0-9]/", $url) ||
-                    // linkis.com
-                    preg_match("/^https?:\/\/linkis\.com\/[a-zA-Z0-9]/", $url) ||
-                    // bit.do
-                    preg_match("/^https?:\/\/bit\.do\/[a-zA-Z0-9]/", $url) ||
-                    // hill.cm
-                    preg_match("/^https?:\/\/hill\.cm\/[a-zA-Z0-9]/", $url) ||
-                    // ara.tv
-                    preg_match("/^https?:\/\/ara\.tv\/[a-zA-Z0-9]/", $url) ||
-                    // tsl.cm
-                    preg_match("/^https?:\/\/tsl\.cm\/[a-zA-Z0-9]/", $url) ||
-                    // ebay.to
-                    preg_match("/^https?:\/\/ebay\.to\/[a-zA-Z0-9]/", $url) ||
-                    // // shar.es
-                    // preg_match("/^https?:\/\/shar\.es\/[a-zA-Z0-9]/", $url) ||
-                    // // wp.me
-                    // preg_match("/^https?:\/\/wp\.me\/[a-zA-Z0-9]/", $url) ||
-                    // url9.co
-                    preg_match("/^https?:\/\/url9\.co\/[a-zA-Z0-9]/", $url) ||
-                    // tt0.co
-                    preg_match("/^https?:\/\/tt0\.co\/[a-zA-Z0-9]/", $url)
-                )
-                {
-                    // ループしていたら中断
-                    if(in_array($url, $history))
-                    {
-                        break;
-                    }
-                    array_push($history, $url);
+                // while
+                // (
+                //     // goo.gl
+                //     preg_match("/^https?:\/\/goo\.gl\/[a-zA-Z0-9]/", $url) ||
+                //     // bit.ly
+                //     preg_match("/^https?:\/\/bit\.ly\/[a-zA-Z0-9]/", $url) ||
+                //     // bitly.com
+                //     preg_match("/^https?:\/\/bitly\.com\/[a-zA-Z0-9]/", $url) ||
+                //     // ift.tt
+                //     preg_match("/^https?:\/\/ift\.tt\/[a-zA-Z0-9]/", $url) ||
+                //     // ln.is
+                //     preg_match("/^https?:\/\/ln\.is\/[a-zA-Z0-9]/", $url) ||
+                //     // dlvr.it
+                //     preg_match("/^https?:\/\/dlvr\.it\/[a-zA-Z0-9]/", $url) ||
+                //     // ow.ly
+                //     preg_match("/^https?:\/\/ow\.ly\/[a-zA-Z0-9]/", $url) ||
+                //     // j.mp
+                //     preg_match("/^https?:\/\/j\.mp\/[a-zA-Z0-9]/", $url) ||
+                //     // buff.ly
+                //     preg_match("/^https?:\/\/buff\.ly\/[a-zA-Z0-9]/", $url) ||
+                //     // dld.bz
+                //     preg_match("/^https?:\/\/dld\.bz\/[a-zA-Z0-9]/", $url) ||
+                //     // trib.al
+                //     preg_match("/^https?:\/\/trib\.al\/[a-zA-Z0-9]/", $url) ||
+                //     // is.gd
+                //     preg_match("/^https?:\/\/is\.gd\/[a-zA-Z0-9]/", $url) ||
+                //     // tinyurl.com
+                //     preg_match("/^https?:\/\/tinyurl\.com\/[a-zA-Z0-9]/", $url) ||
+                //     // linkis.com
+                //     preg_match("/^https?:\/\/linkis\.com\/[a-zA-Z0-9]/", $url) ||
+                //     // bit.do
+                //     preg_match("/^https?:\/\/bit\.do\/[a-zA-Z0-9]/", $url) ||
+                //     // hill.cm
+                //     preg_match("/^https?:\/\/hill\.cm\/[a-zA-Z0-9]/", $url) ||
+                //     // ara.tv
+                //     preg_match("/^https?:\/\/ara\.tv\/[a-zA-Z0-9]/", $url) ||
+                //     // tsl.cm
+                //     preg_match("/^https?:\/\/tsl\.cm\/[a-zA-Z0-9]/", $url) ||
+                //     // ebay.to
+                //     preg_match("/^https?:\/\/ebay\.to\/[a-zA-Z0-9]/", $url) ||
+                //     // shar.es
+                //     preg_match("/^https?:\/\/shar\.es\/[a-zA-Z0-9]/", $url) ||
+                //     // wp.me
+                //     preg_match("/^https?:\/\/wp\.me\/[a-zA-Z0-9]/", $url) ||
+                //     // url9.co
+                //     preg_match("/^https?:\/\/url9\.co\/[a-zA-Z0-9]/", $url) ||
+                //     // tt0.co
+                //     preg_match("/^https?:\/\/tt0\.co\/[a-zA-Z0-9]/", $url)
+                // )
+                // {
+                //     // ループしていたら中断
+                //     if(in_array($url, $history))
+                //     {
+                //         break;
+                //     }
+                //     array_push($history, $url);
 
-                    $extract = Request::extract_url($url);
-                    if($extract == null || $extract == $url)
-                    {
-                        break;
-                    }
-                    $url = $extract;
-                }
+                //     $extract = Request::extract_url($url);
+                //     if($extract == null || $extract == $url)
+                //     {
+                //         break;
+                //     }
+                //     $url = $extract;
+                // }
 
                 $tomori = new Analyze($url);
 
