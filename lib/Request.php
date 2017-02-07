@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Client;
 use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Plugin\History\HistoryPlugin;
 
