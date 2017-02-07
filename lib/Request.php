@@ -1,6 +1,7 @@
 <?php
 
-use GuzzleHttp\Client;
+use Guzzle\Http\Client as GuzzleClient;
+use Guzzle\Plugin\History\HistoryPlugin;
 
 class Request
 {
@@ -61,59 +62,15 @@ class Request
             return $url;
         }
 
-        // linkisは余計な部分を取り除く
-        if(preg_match('/^https?:\/\/linkis\.com\/[a-zA-Z0-9]/', $url))
-        {
-            if(substr($url, 0, 5) === 'https')
-            {
-                $extract_url = 'https://' . substr($url, 19);
-            }
-            else
-            {
-                $extract_url = 'http://' . substr($url, 18);
-            }
-            $host = parse_url($extract_url, PHP_URL_HOST);
-            if(strpos($host, '.') === false)
-            {
-                return $url;
-            }
-
-            return $extract_url;
-        }
-        
-        $ua = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36';
-        $ref = $url;
-        try
-        {
-            $curl = curl_init($url);
-            $options =
-            [
-                CURLOPT_USERAGENT => $ua,
-                CURLOPT_TIMEOUT => 5,
-                CURLOPT_HTTPGET => true,
-                CURLOPT_RETURNTRANSFER => true
-            ];
-            curl_setopt_array($curl, $options);
-            $response = curl_exec($curl);
-            $headers = curl_getinfo($curl);
-            $extract_url = $headers['redirect_url'];
-
-            if(!preg_match('/^https?:\/\//', $extract_url))
-            {
-                $domain = parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
-                $extract_url = $domain . $extract_url;
-            }
-
-            $host = parse_url($extract_url, PHP_URL_HOST);
-            if(strpos($host, '.') === false)
-            {
-                return $url;
-            }
-            return $extract_url;
-        }
-        catch(\Exception $e)
+        $client = new GuzzleClient($url);
+        $history = new HistoryPlugin();
+        $client->addSubscriber($history);
+        $response = $client->head($url)->send();
+        if (!$response->isSuccessful())
         {
             return $url;
         }
+        
+        return $response->getEffectiveUrl();
     }
 }
