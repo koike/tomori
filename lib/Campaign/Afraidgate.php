@@ -4,6 +4,8 @@ class Afraidgate
 {
     public static function analyze(string $html, string $url) : bool
     {
+        echo 2;
+
         if
         (
             preg_match_all
@@ -123,6 +125,8 @@ class Afraidgate
                 }
             }
         }
+
+        echo 8;
         return ['is_mallicious' => false, 'js' => null, 'content' => null];
     }
 }

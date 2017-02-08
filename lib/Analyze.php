@@ -44,8 +44,9 @@ class Analyze
             {
                 $this->description = 'EITest2';
             }
+            echo 0;
             $af = Afraidgate::analyze($html, $this->url);
-            var_dump($af);
+            echo 9;
             if($af['is_mallicious'])
             {
                 $this->description = 'Afraidgate (' . $af['js'] . ')';
