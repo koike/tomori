@@ -126,7 +126,7 @@ class SampleConsumer extends OauthPhirehose
                     $tomori = new Analyze($url);
                     $tomori->analyze($response);
                     
-                    if($tomori->get_is_mallicious())
+                    if($tomori->get_is_malicious())
                     {
                         $tomori->register_db($data);
                         Notificate::slack($tomori);
