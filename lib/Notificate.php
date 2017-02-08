@@ -54,40 +54,62 @@ class Notificate
         }
     }
 
-    public static function exception(\Exception $e)
+    public static function exception($e, $str=null, $file=null, $line=null)
     {
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {
-            $channel = '#exception';
+            if(get_class($e) == Exception)
+            {
+                $channel = '#exception';
 
-            ob_start();
-            var_dump($e);
-            $exception_dump = ob_get_contents();
-            ob_end_clean();
+                ob_start();
+                var_dump($e);
+                $exception_dump = ob_get_contents();
+                ob_end_clean();
 
-            $exception_dump = str_replace('```', '` ` `', $exception_dump);
-            $code = $e->getCode();
-            $file = $e->getFile();
-            $line = $e->getLine();
-            $trace = $e->getTraceAsString();
-            $message = $e->getMessage();
-            $text = "[Exception (" . $code . ")]\n" .
-                    "file:" . $file . " => line:" . $line . "\n" .
-                    $message . "\n" .
-                    "```\n" .
-                    $trace .
-                    "\n```";
+                $exception_dump = str_replace('```', '` ` `', $exception_dump);
+                $code = $e->getCode();
+                $file = $e->getFile();
+                $line = $e->getLine();
+                $trace = $e->getTraceAsString();
+                $message = $e->getMessage();
+                $text = "[Exception (" . $code . ")]\n" .
+                        "file:" . $file . " => line:" . $line . "\n" .
+                        $message . "\n" .
+                        "```\n" .
+                        $trace .
+                        "\n```";
 
-            $url = 'https://slack.com/api/chat.postMessage';
-            $data =
-            [
-                'token'     =>  $token,
-                'channel'   =>  $channel,
-                'text'      =>  $text,
-                'username'  =>  'tomori'
-            ];
-            Notificate::post($url, $data);
+                $url = 'https://slack.com/api/chat.postMessage';
+                $data =
+                [
+                    'token'     =>  $token,
+                    'channel'   =>  $channel,
+                    'text'      =>  $text,
+                    'username'  =>  'tomori'
+                ];
+                Notificate::post($url, $data);
+            }
+            else
+            {
+                $channel = '#error';
+                $text = "[Error (" . $no . ")]\n" .
+                        "file:" . $file . " => line:" . $line . "\n" .
+                        "```\n" .
+                        $str .
+                        "\n```";
+
+                $url = 'https://slack.com/api/chat.postMessage';
+                $data =
+                [
+                    'token'     =>  $token,
+                    'channel'   =>  $channel,
+                    'text'      =>  $text,
+                    'username'  =>  'tomori'
+                ];
+                Notificate::post($url, $data);
+            }   
         }
     }
 

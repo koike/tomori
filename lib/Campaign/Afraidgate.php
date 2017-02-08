@@ -37,6 +37,8 @@ class Afraidgate
                         return ['is_mallicious' => false, 'js' => null, 'content' => null];
                     }
 
+                    echo 2.5;
+
                     // 既に調べていないかデータベースを確認
                     $url_accessed = json_decode
                     (
