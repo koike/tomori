@@ -12,7 +12,7 @@ class Notificate
             if($token != null && $token != '')
             {
                 $channel = '#alert';
-                $text = '[Compromised (' . $tomori->get_description() . ')] ' . date('Y-m-d H:i:s') .
+                $text = '[' . $tomori->get_description() . '] ' . date('Y-m-d H:i:s') .
                         "\n```\n" .
                         $tomori->get_url() .
                         "\n```\n\n" .
