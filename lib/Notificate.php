@@ -59,7 +59,7 @@ class Notificate
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
         {
-            if(get_class($e) == Exception)
+            if(get_class($e) == 'Exception')
             {
                 $channel = '#exception';
 
