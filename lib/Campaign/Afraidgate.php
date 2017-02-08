@@ -2,7 +2,7 @@
 
 class Afraidgate
 {
-    public static function analyze(string $html, string $url) : bool
+    public static function analyze(string $html, string $url) : array
     {
         if
         (
@@ -15,19 +15,13 @@ class Afraidgate
             )
         )
         {
-            echo 0;
-
             foreach($js_array as $js)
             {
-                echo 1;
-            
                 $js = $js[0];
                 $js = substr($js, strlen('<script type="text/javascript" src="'));
                 $js = substr($js, 0, (-1) * strlen('"></script>'));
                 if(preg_match('/^https?:\/\//', $js))
                 {
-                    echo 2;
-            
                     $server_host = parse_url($url, PHP_URL_HOST);
                     $host = parse_url($js, PHP_URL_HOST);
 
@@ -36,8 +30,6 @@ class Afraidgate
                     {
                         return ['is_mallicious' => false, 'js' => null, 'content' => null];
                     }
-
-                    echo 2.5;
 
                     // 既に調べていないかデータベースを確認
                     $url_accessed = json_decode
@@ -52,8 +44,6 @@ class Afraidgate
                     {
                         return ['is_mallicious' => false, 'js' => null, 'content' => null];
                     }
-
-                    echo 3; 
 
                     $date = date('Y-m-d H:i:s');
                     DB::table('AFRAID')
@@ -72,8 +62,6 @@ class Afraidgate
                     }
                     try
                     {
-                        echo 4;
-            
                         $dns = dns_get_record($host, DNS_NS);
                         for($i=0; $i<count($dns); $i++)
                         {
@@ -127,18 +115,14 @@ class Afraidgate
                                 }
                             }
                         }
-                        echo 5;
                     }
                     catch(\Exception $e)
                     {
                         //
                     }
                 }
-                echo 6;
             }
         }
-        echo 7;
-        $ret = ['is_mallicious' => false, 'js' => null, 'content' => null];
-        return $ret;
+        return ['is_mallicious' => false, 'js' => null, 'content' => null];
     }
 }
