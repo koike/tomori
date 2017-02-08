@@ -94,7 +94,7 @@ class Notificate
             else
             {
                 $channel = '#error';
-                $text = "[Error (" . $no . ")]\n" .
+                $text = "[Error (" . $e . ")]\n" .
                         "file:" . $file . " => line:" . $line . "\n" .
                         "```\n" .
                         $str .
