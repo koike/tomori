@@ -23,33 +23,49 @@ class Analyze
     
     public function analyze(array $response) : bool
     {
+        echo 0;
+
         $status = $response['status'];
         $html = $response['body'];
         $this->html = $html;
         
         if($status >= 200 && $status < 400)
         {
+            echo 1;
+        
             $pd = PseudoDarkleech::analyze($html);
             if($pd)
             {
                 $this->description = 'pseudoDarkleech';
             }
+
+            echo 2;
+        
             $ei = EITest::analyze($html);
             if($ei)
             {
                 $this->description = 'EITest';
             }
+
+            echo 3;
+        
             $ei2 = EITest2::analyze($html);
             if($ei2)
             {
                 $this->description = 'EITest2';
             }
+
+            echo 4;
+        
             $af = Afraidgate::analyze($html, $this->url);
             if($af['is_mallicious'])
             {
                 $this->description = 'Afraidgate (' . $af['js'] . ')';
                 $this->js_content = $af['js_content'];
             }
+
+            echo 5;
+        
             
             if($pd || $ei || $ei2 || $af)
             {
@@ -57,6 +73,9 @@ class Analyze
                 return true;
             }
         }
+
+        echo 6;
+        
         
         $this->is_mallicious = false;
         return false;
