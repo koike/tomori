@@ -136,7 +136,7 @@ class Afraidgate
             }
         }
         echo 7;
-            
-        return ['is_mallicious' => false, 'js' => null, 'content' => null];
+        $ret = ['is_mallicious' => false, 'js' => null, 'content' => null];
+        return $ret;
     }
 }

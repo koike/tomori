@@ -44,12 +44,15 @@ class Analyze
             {
                 $this->description = 'EITest2';
             }
+            echo 'a';
             $af = Afraidgate::analyze($html, $this->url);
+            echo 'b';
             if($af['is_mallicious'])
             {
                 $this->description = 'Afraidgate (' . $af['js'] . ')';
                 $this->js_content = $af['js_content'];
             }
+            echo 'c';
             
             if($pd || $ei || $ei2 || $af)
             {
