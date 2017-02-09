@@ -81,7 +81,7 @@ class SampleConsumer extends OauthPhirehose
                     {
                         break;
                     }
-                    array_push($history, $url);
+                    $history[] = $url;
 
                     $extract = Request::extract_url($url);
                     if($extract == null || $extract == $url)
