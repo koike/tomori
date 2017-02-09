@@ -41,6 +41,7 @@ class Analyze
                     $result = $campaign::analyze($html, $this->url);
                     // format result
                     $result['is_malicious'] = $result['is_malicious'] ?? $result;
+                    echo '    [*] ' . $campaign . ' => ' . var_export($result['is_malicious'], true) . PHP_EOL;
 
                     if($result['is_malicious'])
                     {
