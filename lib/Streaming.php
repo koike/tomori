@@ -23,8 +23,6 @@ class SampleConsumer extends OauthPhirehose
                 // urlを小文字に変換
                 $url = mb_strtolower($url);
 
-                echo 0;
-
                 // 無限に展開しないように
                 $history = [];
                 // 短縮URLの場合は再帰的に展開する
@@ -93,11 +91,7 @@ class SampleConsumer extends OauthPhirehose
                     $url = $extract;
                 }
 
-                echo 1;
-
                 $tomori = new Analyze($url);
-
-                echo 2;
 
                 // 解析する意味のあるURLか
                 if(!$tomori->exclude_url())
@@ -105,17 +99,12 @@ class SampleConsumer extends OauthPhirehose
                     return;
                 }
 
-                echo 3;
-
                 // 既に解析していないか
                 $url_accessed = DB::table('URL')->where('url', $url)->get();
-
-                echo 4;
+                var_dump($url_accessed);
 
                 if(empty($url_accessed))
                 {
-                    echo 5;
-
                     $date = date('Y-m-d H:i:s');
 
                     DB::table('URL')
@@ -126,8 +115,6 @@ class SampleConsumer extends OauthPhirehose
                             'created_at'    =>  $date
                         ]
                     );
-
-                    echo 6;
 
                     $response = Request::get($url);
                     $tomori = new Analyze($url);
@@ -144,8 +131,6 @@ class SampleConsumer extends OauthPhirehose
                         echo '[-] ' . $url . PHP_EOL;
                     }
                 }
-
-                echo 7;
             }
         }
     }
