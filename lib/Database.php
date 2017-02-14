@@ -31,7 +31,7 @@ class DB
                     $event->statement->setFetchMode(PDO::FETCH_ASSOC);
                 }
             );
-            static::$db->setEventDispatcher(new Dispatcher(new Container));
+            static::$db->setEventDispatcher($dispatcher);
             static::$db->setAsGlobal();
         }
 
