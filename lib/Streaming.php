@@ -100,9 +100,7 @@ class SampleConsumer extends OauthPhirehose
                 }
 
                 // 既に解析していないか
-                $url_accessed = DB::table('URL')->where('url', $url)->get();
-                var_dump($url_accessed);
-
+                $url_accessed = DB::table('URL')->where('url', $url)->get()->all();
                 if(empty($url_accessed))
                 {
                     $date = date('Y-m-d H:i:s');

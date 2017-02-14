@@ -151,8 +151,8 @@ class Analyze
         $url = $this->url;
         
         // ドメインのwhite listを取得
-        $white_list = DB::table('WHITE_LIST')->get();
-        
+        $white_list = DB::table('WHITE_LIST')->get()->all();
+
         // white listに含まれている場合は解析する必要なし
         foreach($white_list as $domain)
         {
