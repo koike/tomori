@@ -21,3 +21,12 @@ foreach(glob(__DIR__ . '/Campaign/*.php') as $file)
         require_once $file;
     }
 }
+
+// require_once /lib/EK/*.php
+foreach(glob(__DIR__ . '/EK/*.php') as $file)
+{
+    if(is_file($file))
+    {
+        require_once $file;
+    }
+}
